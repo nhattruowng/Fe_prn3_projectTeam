@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaRegHeart ,FaLungs,FaCoins ,FaShieldAlt } from "react-icons/fa";
+import { MdInsertEmoticon } from "react-icons/md";
+
+
+
 
 const Home: React.FC = () => {
     // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,25 +43,25 @@ const Home: React.FC = () => {
             <div className="relative pt-16">
                 <div className="absolute inset-0 overflow-hidden animate-fadeIn">
                     <img
-                        src="/hero-image.jpg"
+                        src="./../../public/hero-image.jpg"
                         alt="Hít thở không khí trong lành"
                         className="w-full h-full object-cover object-top animate-scaleIn"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-600 via-green-600/90 to-transparent animate-fadeIn"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-15% via-green-300 to-transparent animate-fadeIn"></div>
                 </div>
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="py-24 md:py-32 lg:py-40">
                         <div className="max-w-lg">
-                            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-400 sm:text-5xl">
                                 Hành Trình Đến Với Cuộc Sống Không Khói Thuốc
                             </h1>
-                            <p className="mt-6 text-xl text-white">
+                            <p className="mt-6 text-xl text-gray-400">
                                 Tham gia cùng hàng nghìn người đã thành công cai thuốc lá với chương trình hỗ trợ hiệu quả của chúng tôi.
                             </p>
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
                                 <Link
                                     to="/signup"
-                                    className="px-8 py-3 text-base font-medium rounded-md text-green-600 bg-white hover:bg-green-100 md:py-4 md:text-lg md:px-10"
+                                    className="px-8 py-3 text-base font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 md:py-4 md:text-lg md:px-10"
                                 >
                                     Bắt Đầu Hành Trình
                                 </Link>
@@ -640,7 +645,7 @@ const Home: React.FC = () => {
                     <div className="mt-16 lg:grid lg:grid-cols-2 lg:gap-8">
                         <div className="relative">
                             <img
-                                src="/benefits-timeline.jpg"
+                                src="./../../public/bodyimage.jpg"
                                 alt="Lợi ích sức khỏe theo thời gian"
                                 className="w-full rounded-lg shadow-lg"
                             />
@@ -648,9 +653,9 @@ const Home: React.FC = () => {
                         <div className="mt-10 lg:mt-0">
                             <div className="space-y-6">
                                 <div className="flex">
-                                    <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <i className="fas fa-heart"></i>
+                                    <div className="flex-s  hrink-0">
+                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-500 text-white">
+                                            <FaRegHeart className="fas fa-heart"/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -663,7 +668,7 @@ const Home: React.FC = () => {
                                 <div className="flex">
                                     <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <i className="fas fa-lungs"></i>
+                                            <FaLungs className="fas fa-lungs"/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -675,8 +680,8 @@ const Home: React.FC = () => {
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <i className="fas fa-coins"></i>
+                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-200 text-yellow-500">
+                                            <FaCoins className="fas fa-coins"/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -688,8 +693,8 @@ const Home: React.FC = () => {
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <i className="fas fa-smile"></i>
+                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-violet-400 text-violet-600">
+                                            <MdInsertEmoticon className="fas fa-smile"/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -701,8 +706,8 @@ const Home: React.FC = () => {
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <i className="fas fa-shield-alt"></i>
+                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-200 text-orange-600">
+                                            <FaShieldAlt className="fas fa-shield-alt"/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
