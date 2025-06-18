@@ -12,17 +12,20 @@ const SignUp: React.FC = () => {
     const {mutate, isPending} = useRegister();
 
     const handleRegis = () => {
-        if (confirmPassword !== confirmPassword) {
+        if (password !== confirmPassword) {
             setMessage("Mật khẩu không khớp");
             return;
         }
+
 
         mutate({email: email, password: password}, {
             onSuccess: () => {
                 setTimeout(() => navigate("/login"), 1500);
             },
-            onError: () => {
-                setMessage("Lỗi không mông muốn")
+            onError: (error: any) => {
+                console.error("Lỗi server:", error);
+                setMessage("Lỗi không mong muốn");
+                alert("lỖI KHÔNG MONG MUỐN!" + "kIỂM TRA LẠI EMAIL HOẶT PASSWORD")
                 setPassword("");
                 setConfirmPassword("");
             }
@@ -46,7 +49,6 @@ const SignUp: React.FC = () => {
                 <div className="my-auto mt-8 flex flex-col w-[350px] max-w-[450px] mx-auto md:mt-[70px] lg:mt-[130px]">
                     <p className="text-[32px] font-bold text-black">Tạo tài khoản</p>
 
-                    {message && <p className="text-red-500 mb-2">{message}</p>}
                     <input type="hidden" name="provider" value="google"/>
                     <button
                         type="button"
