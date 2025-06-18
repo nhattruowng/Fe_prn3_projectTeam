@@ -1,49 +1,42 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaRegHeart ,FaLungs,FaCoins ,FaShieldAlt } from "react-icons/fa";
+import {
+    FaTrophy,
+    FaLeaf,
+    FaHeart,
+    FaMedal,
+    FaStar,
+    FaFire,
+    FaAward,
+    FaBolt,
+    FaSun,
+    FaChartLine,
+    FaComments,
+    FaUserMd,
+    FaUsers,
+    FaRegHeart,
+    FaLungs,
+    FaCoins,
+    FaShieldAlt,
+    FaChevronRight
+} from "react-icons/fa";
 import { MdInsertEmoticon } from "react-icons/md";
-
-
+import { Pricing } from "../components/Pricing.tsx";
+import { BlogHomePage } from "../components/BlogHomePage.tsx";
 
 
 const Home: React.FC = () => {
-    // const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeDialog, setActiveDialog] = useState<string | null>(null);
+    const [modalOpen, setModalOpen] = useState<string | null>(null);
 
-    // Thêm keyframes cho animation
-    const style = document.createElement("style");
-    style.textContent = `
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes scaleIn {
-      from { transform: scale(1.1); }
-      to { transform: scale(1); }
-    }
-    
-    .animate-fadeIn {
-      animation: fadeIn 1.5s ease-out forwards;
-    }
-    
-    .animate-scaleIn {
-      animation: scaleIn 2s ease-out forwards;
-    }
-  `;
-    document.head.appendChild(style);
-
-    // const toggleMenu = () => {
-    //     setIsMenuOpen(!isMenuOpen);
-    // };
+    const openModal = (title: string) => setModalOpen(title);
 
     return (
         <div className="min-h-screen bg-gray-100 font-sans">
-
+            {/* Hero Section */}
             <div className="relative pt-16">
                 <div className="absolute inset-0 overflow-hidden animate-fadeIn">
                     <img
-                        src="./../../public/hero-image.jpg"
+                        src="/hero-image.jpg"
                         alt="Hít thở không khí trong lành"
                         className="w-full h-full object-cover object-top animate-scaleIn"
                     />
@@ -65,7 +58,6 @@ const Home: React.FC = () => {
                                 >
                                     Bắt Đầu Hành Trình
                                 </Link>
-
                             </div>
                         </div>
                     </div>
@@ -88,7 +80,7 @@ const Home: React.FC = () => {
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <div className="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center">
-                                        <i className="fas fa-trophy text-yellow-400 text-2xl"></i>
+                                        <FaTrophy className="text-yellow-400 text-2xl" />
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Nguyễn Văn A</h3>
@@ -103,10 +95,10 @@ const Home: React.FC = () => {
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    <i className="fas fa-leaf mr-1"></i> Cao Thủ
+                    <FaLeaf className="mr-1" /> Cao Thủ
                   </span>
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    <i className="fas fa-heart mr-1"></i> Kiên Trì
+                    <FaHeart className="mr-1" /> Kiên Trì
                   </span>
                                 </div>
                             </div>
@@ -115,7 +107,7 @@ const Home: React.FC = () => {
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
-                                        <i className="fas fa-medal text-gray-400 text-2xl"></i>
+                                        <FaMedal className="text-gray-400 text-2xl" />
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Trần Thị B</h3>
@@ -130,10 +122,10 @@ const Home: React.FC = () => {
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                    <i className="fas fa-star mr-1"></i> Quyết Tâm
+                    <FaStar className="mr-1" /> Quyết Tâm
                   </span>
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                    <i className="fas fa-fire mr-1"></i> Tiến Bộ
+                    <FaFire className="mr-1" /> Tiến Bộ
                   </span>
                                 </div>
                             </div>
@@ -142,7 +134,7 @@ const Home: React.FC = () => {
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
                                     <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <i className="fas fa-award text-orange-400 text-2xl"></i>
+                                        <FaAward className="text-orange-400 text-2xl" />
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Lê Văn C</h3>
@@ -157,10 +149,10 @@ const Home: React.FC = () => {
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                    <i className="fas fa-bolt mr-1"></i> Nỗ Lực
+                    <FaBolt className="mr-1" /> Nỗ Lực
                   </span>
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                    <i className="fas fa-sun mr-1"></i> Tích Cực
+                    <FaSun className="mr-1" /> Tích Cực
                   </span>
                                 </div>
                             </div>
@@ -241,72 +233,9 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-            {/* Success Stories Section */}
-            <div id="success-stories" className="py-16 bg-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            Câu Chuyện Thành Công
-                        </h2>
-                        <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                            Những con người thật, kết quả thật. Hãy xem thành viên cộng đồng của chúng tôi đã đạt được gì.
-                        </p>
-                    </div>
-                    <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        <div className="bg-white rounded-lg shadow-md p-8">
-                            <div className="flex items-center mb-6">
-                                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                                    <i className="fas fa-user text-green-600"></i>
-                                </div>
-                                <div className="ml-4">
-                                    <h3 className="text-lg font-medium text-gray-900">Nguyễn Văn H</h3>
-                                    <p className="text-sm text-green-600">Không hút thuốc 1 năm</p>
-                                </div>
-                            </div>
-                            <p className="text-gray-600 italic">
-                                "Sau 15 năm hút thuốc, tôi không nghĩ mình có thể bỏ. Hệ thống hỗ trợ và công cụ ở đây đã thay đổi mọi thứ. Tôi khỏe mạnh hơn, giàu có hơn và hạnh phúc hơn!"
-                            </p>
-                        </div>
-                        <div className="bg-white rounded-lg shadow-md p-8">
-                            <div className="flex items-center mb-6">
-                                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                                    <i className="fas fa-user text-green-600"></i>
-                                </div>
-                                <div className="ml-4">
-                                    <h3 className="text-lg font-medium text-gray-900">Trần Thị M</h3>
-                                    <p className="text-sm text-green-600">Không hút thuốc 8 tháng</p>
-                                </div>
-                            </div>
-                            <p className="text-gray-600 italic">
-                                "Cộng đồng đã giúp tôi chịu trách nhiệm khi cơn thèm thuốc đến. Công cụ theo dõi tiến trình cho thấy sự cải thiện sức khỏe đã thúc đẩy tôi tiếp tục."
-                            </p>
-                        </div>
-                        <div className="bg-white rounded-lg shadow-md p-8">
-                            <div className="flex items-center mb-6">
-                                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center">
-                                    <i className="fas fa-user text-green-600"></i>
-                                </div>
-                                <div className="ml-4">
-                                    <h3 className="text-lg font-medium text-gray-900">Lê Văn K</h3>
-                                    <p className="text-sm text-green-600">Không hút thuốc 6 tháng</p>
-                                </div>
-                            </div>
-                            <p className="text-gray-600 italic">
-                                "Kế hoạch cá nhân hóa đã giải quyết các tác nhân và thói quen cụ thể của tôi. Các buổi tư vấn là yếu tố thay đổi trong những thời điểm khó khăn. Tôi đã tiết kiệm được hơn 5 triệu đồng!"
-                            </p>
-                        </div>
-                    </div>
-                    <div className="mt-12 text-center">
-                        <Link
-                            to="/success-stories"
-                            className="inline-flex items-center px-6 py-3 text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
-                        >
-                            Xem Thêm Câu Chuyện
-                            <i className="fas fa-arrow-right ml-2"></i>
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <Pricing />
+
+            <BlogHomePage />
 
             {/* Support Tools Section */}
             <div id="resources" className="py-16 bg-white">
@@ -322,7 +251,7 @@ const Home: React.FC = () => {
                     <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
                             <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <i className="fas fa-chart-line text-green-600"></i>
+                                <FaChartLine className="text-green-600" />
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Theo Dõi Tiến Trình
@@ -332,67 +261,18 @@ const Home: React.FC = () => {
                             </p>
                             <div className="mt-4 text-center">
                                 <button
-                                    onClick={() => setActiveDialog("tracker")}
+                                    onClick={() => openModal("Theo Dõi Tiến Trình")}
                                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
+                                    aria-label="Mở Theo Dõi Tiến Trình"
                                 >
                                     Truy Cập
-                                    <i className="fas fa-chevron-right ml-1 text-xs"></i>
+                                    <FaChevronRight className="ml-1 text-xs" />
                                 </button>
                             </div>
                         </div>
-                        {activeDialog === "tracker" && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                                <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h3 className="text-xl font-bold text-gray-900">Theo Dõi Tiến Trình</h3>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="text-gray-600 hover:text-gray-800"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div className="bg-green-50 rounded-lg p-4">
-                                            <div className="flex items-center justify-between">
-                                                <div>
-                                                    <p className="text-sm text-gray-600">Ngày không hút thuốc</p>
-                                                    <p className="text-2xl font-bold text-green-600">15</p>
-                                                </div>
-                                                <i className="fas fa-calendar-check text-green-600 text-3xl"></i>
-                                            </div>
-                                        </div>
-                                        <div className="bg-green-50 rounded-lg p-4">
-                                            <div className="flex items-center justify-between">
-                                                <div>
-                                                    <p className="text-sm text-gray-600">Tiền tiết kiệm</p>
-                                                    <p className="text-2xl font-bold text-green-600">3.750.000 đ</p>
-                                                </div>
-                                                <i className="fas fa-piggy-bank text-green-600 text-3xl"></i>
-                                            </div>
-                                        </div>
-                                        <div className="bg-green-50 rounded-lg p-4">
-                                            <div className="flex items-center justify-between">
-                                                <div>
-                                                    <p className="text-sm text-gray-600">Điểm sức khỏe</p>
-                                                    <p className="text-2xl font-bold text-green-600">85%</p>
-                                                </div>
-                                                <i className="fas fa-heartbeat text-green-600 text-3xl"></i>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-                                        >
-                                            Đóng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
                             <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <i className="fas fa-comments text-green-600"></i>
+                                <FaComments className="text-green-600" />
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Hỗ Trợ Trò Chuyện
@@ -402,60 +282,18 @@ const Home: React.FC = () => {
                             </p>
                             <div className="mt-4 text-center">
                                 <button
-                                    onClick={() => setActiveDialog("chat")}
+                                    onClick={() => openModal("Hỗ Trợ Trò Chuyện")}
                                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
+                                    aria-label="Mở Hỗ Trợ Trò Chuyện"
                                 >
                                     Truy Cập
-                                    <i className="fas fa-chevron-right ml-1 text-xs"></i>
+                                    <FaChevronRight className="ml-1 text-xs" />
                                 </button>
                             </div>
                         </div>
-                        {activeDialog === "chat" && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                                <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h3 className="text-xl font-bold text-gray-900">Hỗ Trợ Trò Chuyện</h3>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="text-gray-600 hover:text-gray-800"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div className="bg-gray-100 rounded-lg p-4 h-64 overflow-y-auto">
-                                            <div className="space-y-4">
-                                                <div className="flex items-start">
-                                                    <div className="bg-green-100 rounded-lg p-3 max-w-[80%]">
-                                                        <p className="text-sm text-gray-800">Xin chào! Chúng tôi có thể giúp gì cho bạn hôm nay?</p>
-                                                        <p className="text-xs text-gray-600 mt-1">Đội ngũ hỗ trợ • 10:30 AM</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-2">
-                                            <input
-                                                type="text"
-                                                placeholder="Nhập tin nhắn..."
-                                                className="flex-1 border border-gray-400 rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                                            />
-                                            <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                                                <i className="fas fa-paper-plane"></i>
-                                            </button>
-                                        </div>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300"
-                                        >
-                                            Đóng Trò Chuyện
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
                             <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <i className="fas fa-user-md text-green-600"></i>
+                                <FaUserMd className="text-green-600" />
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Tư Vấn Chuyên Nghiệp
@@ -465,85 +303,18 @@ const Home: React.FC = () => {
                             </p>
                             <div className="mt-4 text-center">
                                 <button
-                                    onClick={() => setActiveDialog("counseling")}
+                                    onClick={() => openModal("Tư Vấn Chuyên Nghiệp")}
                                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
+                                    aria-label="Mở Tư Vấn Chuyên Nghiệp"
                                 >
                                     Truy Cập
-                                    <i className="fas fa-chevron-right ml-1 text-xs"></i>
+                                    <FaChevronRight className="ml-1 text-xs" />
                                 </button>
                             </div>
                         </div>
-                        {activeDialog === "counseling" && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                                <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h3 className="text-xl font-bold text-gray-900">Tư Vấn Chuyên Nghiệp</h3>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="text-gray-600 hover:text-gray-800"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="bg-green-50 rounded-lg p-4 text-center">
-                                                <i className="fas fa-video text-green-600 text-2xl mb-2"></i>
-                                                <h4 className="font-medium">Buổi Tư Vấn Video</h4>
-                                                <p className="text-sm text-gray-600 mt-1">45 phút</p>
-                                            </div>
-                                            <div className="bg-green-50 rounded-lg p-4 text-center">
-                                                <i className="fas fa-phone text-green-600 text-2xl mb-2"></i>
-                                                <h4 className="font-medium">Tư Vấn Qua Điện Thoại</h4>
-                                                <p className="text-sm text-gray-600 mt-1">30 phút</p>
-                                            </div>
-                                        </div>
-                                        <div className="bg-gray-50 rounded-lg p-4">
-                                            <h4 className="font-medium mb-2">Cố Vấn Có Sẵn</h4>
-                                            <div className="space-y-3">
-                                                <div className="flex items-center justify-between">
-                                                    <div className="flex items-center">
-                                                        <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                                            <i className="fas fa-user text-gray-600"></i>
-                                                        </div>
-                                                        <div className="ml-3">
-                                                            <p className="font-medium">TS. Nguyễn Thị Lan</p>
-                                                            <p className="text-sm text-gray-600">Chuyên gia cai nghiện</p>
-                                                        </div>
-                                                    </div>
-                                                    <button className="text-green-600 hover:text-green-700 text-sm font-medium">
-                                                        Đặt Lịch
-                                                    </button>
-                                                </div>
-                                                <div className="flex items-center justify-between">
-                                                    <div className="flex items-center">
-                                                        <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                                            <i className="fas fa-user text-gray-600"></i>
-                                                        </div>
-                                                        <div className="ml-3">
-                                                            <p className="font-medium">TS. Trần Văn Minh</p>
-                                                            <p className="text-sm text-gray-600">Chuyên gia tâm lý</p>
-                                                        </div>
-                                                    </div>
-                                                    <button className="text-green-600 hover:text-green-700 text-sm font-medium">
-                                                        Đặt Lịch
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-                                        >
-                                            Đóng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
                             <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <i className="fas fa-users text-green-600"></i>
+                                <FaUsers className="text-green-600" />
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Diễn Đàn Cộng Đồng
@@ -552,81 +323,15 @@ const Home: React.FC = () => {
                                 Kết nối với những người cùng hành trình để nhận mẹo, động lực và tình bạn.
                             </p>
                             <div className="mt-4 text-center">
-                                <button
-                                    onClick={() => setActiveDialog("community")}
+                                <Link to="/blog"
                                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
+                                    aria-label="Mở Diễn Đàn Cộng Đồng"
                                 >
                                     Truy Cập
-                                    <i className="fas fa-chevron-right ml-1 text-xs"></i>
-                                </button>
+                                    <FaChevronRight className="ml-1 text-xs" />
+                                </Link>
                             </div>
                         </div>
-                        {activeDialog === "community" && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-                                <div className="bg-white rounded-lg p-8 max-w-lg w-full mx-4">
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h3 className="text-xl font-bold text-gray-900">Diễn Đàn Cộng Đồng</h3>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="text-gray-600 hover:text-gray-800"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div className="space-y-4">
-                                            <div className="bg-gray-50 rounded-lg p-4">
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <h4 className="font-medium">Thảo Luận Mới Nhất</h4>
-                                                    <button className="text-green-600 hover:text-green-700 text-sm">
-                                                        Bài Đăng Mới
-                                                    </button>
-                                                </div>
-                                                <div className="space-y-3">
-                                                    <div className="flex items-center justify-between">
-                                                        <div>
-                                                            <p className="font-medium">Mẹo kiểm soát cơn thèm thuốc</p>
-                                                            <p className="text-sm text-gray-600">32 phản hồi • 2 giờ trước</p>
-                                                        </div>
-                                                        <i className="fas fa-chevron-right text-gray-600"></i>
-                                                    </div>
-                                                    <div className="flex items-center justify-between">
-                                                        <div>
-                                                            <p className="font-medium">Kỷ niệm 1 tháng không hút thuốc!</p>
-                                                            <p className="text-sm text-gray-600">45 phản hồi • 5 giờ trước</p>
-                                                        </div>
-                                                        <i className="fas fa-chevron-right text-gray-600"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="bg-green-50 rounded-lg p-4">
-                                                <h4 className="font-medium mb-2">Nhóm Hoạt Động</h4>
-                                                <div className="space-y-2">
-                                                    <button className="w-full text-left px-3 py-2 rounded bg-white hover:bg-gray-50">
-                                                        <div className="flex items-center">
-                                                            <i className="fas fa-users text-green-600 mr-2"></i>
-                                                            <span>Hỗ Trợ Người Mới (125 thành viên)</span>
-                                                        </div>
-                                                    </button>
-                                                    <button className="w-full text-left px-3 py-2 rounded bg-white hover:bg-gray-50">
-                                                        <div className="flex items-center">
-                                                            <i className="fas fa-star text-green-600 mr-2"></i>
-                                                            <span>Câu Chuyện Thành Công (89 thành viên)</span>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => setActiveDialog(null)}
-                                            className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-                                        >
-                                            Đóng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
@@ -645,7 +350,7 @@ const Home: React.FC = () => {
                     <div className="mt-16 lg:grid lg:grid-cols-2 lg:gap-8">
                         <div className="relative">
                             <img
-                                src="./../../public/bodyimage.jpg"
+                                src="/bodyimage.jpg"
                                 alt="Lợi ích sức khỏe theo thời gian"
                                 className="w-full rounded-lg shadow-lg"
                             />
@@ -653,9 +358,9 @@ const Home: React.FC = () => {
                         <div className="mt-10 lg:mt-0">
                             <div className="space-y-6">
                                 <div className="flex">
-                                    <div className="flex-s  hrink-0">
+                                    <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-500 text-white">
-                                            <FaRegHeart className="fas fa-heart"/>
+                                            <FaRegHeart />
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -668,7 +373,7 @@ const Home: React.FC = () => {
                                 <div className="flex">
                                     <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <FaLungs className="fas fa-lungs"/>
+                                            <FaLungs />
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -681,7 +386,7 @@ const Home: React.FC = () => {
                                 <div className="flex">
                                     <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-200 text-yellow-500">
-                                            <FaCoins className="fas fa-coins"/>
+                                            <FaCoins />
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -694,7 +399,7 @@ const Home: React.FC = () => {
                                 <div className="flex">
                                     <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-violet-400 text-violet-600">
-                                            <MdInsertEmoticon className="fas fa-smile"/>
+                                            <MdInsertEmoticon />
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -707,7 +412,7 @@ const Home: React.FC = () => {
                                 <div className="flex">
                                     <div className="flex-shrink-0">
                                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-200 text-orange-600">
-                                            <FaShieldAlt className="fas fa-shield-alt"/>
+                                            <FaShieldAlt />
                                         </div>
                                     </div>
                                     <div className="ml-4">
@@ -750,7 +455,6 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

@@ -1,53 +1,59 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store.ts";
+import {UserCircle} from "lucide-react";
 
 const Header: React.FC = () => {
+    const user = useSelector((state: RootState) => state.user.user);
+
     return (
-        <header className="border-gray-500 text-black shadow-lg">
-            <div className="container mx-auto px-4 py-6 flex items-center justify-between">
-                <div className="flex items-center">
+        <header className="bg-white shadow-md border-b border-gray-200">
+            <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+                {/* Logo + tiêu đề */}
+                <div className="flex items-center space-x-3">
                     <img
                         src="/logo.png"
-                        alt="Logo Hỗ trợ Cai Thuốc Lá"
-                        className="h-12 w-12 mr-3"
+                        alt="Logo"
+                        className="h-10 w-10"
                     />
-                    <h1 className="text-2xl font-bold">
+                    <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
                         Hỗ trợ Cai Thuốc Lá
                     </h1>
                 </div>
-                <div className="flex items-center space-x-6">
-                    <nav className="flex space-x-6">
-                        <a
-                            href="/"
-                            className="hover:text-3xl transition-colors duration-200"
-                        >
-                            Trang Chủ
-                        </a>
-                        <a
-                            href="/tips"
-                            className="hover:text-3xl transition-colors duration-200"
-                        >
-                            Mẹo Cai Thuốc
-                        </a>
-                        <a
-                            href="/resources"
-                            className="hover:text-3xl transition-colors duration-200"
-                        >
-                            Tài Nguyên
-                        </a>
-                        <a
-                            href="/contact"
-                            className="hover:text-3xl transition-colors duration-200"
-                        >
-                            Liên Hệ
-                        </a>
-                    </nav>
-                    <Link
-                        to="/login"
-                        className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-400 hover:text-black transition-colors duration-200 font-medium"
-                    >
-                        Đăng Nhập
-                    </Link>
+
+                {/* Navigation */}
+                <nav className="hidden md:flex space-x-6 text-gray-600 font-medium">
+                    <a href="/" className="hover:text-blue-600 hover:underline transition">
+                        Trang Chủ
+                    </a>
+                    <a href="/tips" className="hover:text-blue-600 hover:underline transition">
+                        Mẹo Cai Thuốc
+                    </a>
+                    <a href="/resources" className="hover:text-blue-600 hover:underline transition">
+                        Tài Nguyên
+                    </a>
+                    <a href="/contact" className="hover:text-blue-600 hover:underline transition">
+                        Liên Hệ
+                    </a>
+                </nav>
+
+                <div className="flex items-center space-x-4">
+                    {
+                        user ? (
+                            <div className="flex items-center space-x-2 text-gray-700">
+                                <UserCircle className="w-6 h-6" />
+                                <span className="font-semibold">{user.fullName}</span>
+                            </div>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition font-medium"
+                            >
+                                Đăng Nhập
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </header>

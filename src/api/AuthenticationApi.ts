@@ -14,9 +14,10 @@ export const LoginApi = async ({email, password}: LoginDto): Promise<User | Exce
 
 export const RegisterApi = async ({email, password}: RegisterDto): Promise<RegisterRespont | ExceptionResponse> => {
     const res = await api.post(REGISTER, {
-        email,
-        password,
+        email: email,
+        password: password
     })
+    console.log(res.data)
     return res.data;
 }
 
