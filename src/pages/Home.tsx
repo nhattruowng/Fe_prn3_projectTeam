@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import {
     FaTrophy,
     FaLeaf,
@@ -20,13 +20,15 @@ import {
     FaShieldAlt,
     FaChevronRight
 } from "react-icons/fa";
-import { MdInsertEmoticon } from "react-icons/md";
-import { Pricing } from "../components/Pricing.tsx";
-import { BlogHomePage } from "../components/BlogHomePage.tsx";
+import {MdInsertEmoticon} from "react-icons/md";
+import {Pricing} from "../components/Pricing.tsx";
+import {BlogHomePage} from "../components/BlogHomePage.tsx";
 
 
 const Home: React.FC = () => {
     const [modalOpen, setModalOpen] = useState<string | null>(null);
+
+    console.log(modalOpen)
 
     const openModal = (title: string) => setModalOpen(title);
 
@@ -40,7 +42,8 @@ const Home: React.FC = () => {
                         alt="Hít thở không khí trong lành"
                         className="w-full h-full object-cover object-top animate-scaleIn"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-15% via-green-300 to-transparent animate-fadeIn"></div>
+                    <div
+                        className="absolute inset-0 bg-gradient-to-r from-15% via-green-300 to-transparent animate-fadeIn"></div>
                 </div>
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="py-24 md:py-32 lg:py-40">
@@ -49,7 +52,8 @@ const Home: React.FC = () => {
                                 Hành Trình Đến Với Cuộc Sống Không Khói Thuốc
                             </h1>
                             <p className="mt-6 text-xl text-gray-400">
-                                Tham gia cùng hàng nghìn người đã thành công cai thuốc lá với chương trình hỗ trợ hiệu quả của chúng tôi.
+                                Tham gia cùng hàng nghìn người đã thành công cai thuốc lá với chương trình hỗ trợ hiệu
+                                quả của chúng tôi.
                             </p>
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
                                 <Link
@@ -79,8 +83,9 @@ const Home: React.FC = () => {
                         <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-yellow-400">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <div className="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center">
-                                        <FaTrophy className="text-yellow-400 text-2xl" />
+                                    <div
+                                        className="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center">
+                                        <FaTrophy className="text-yellow-400 text-2xl"/>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Nguyễn Văn A</h3>
@@ -94,11 +99,13 @@ const Home: React.FC = () => {
                             </div>
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    <FaLeaf className="mr-1" /> Cao Thủ
+                  <span
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <FaLeaf className="mr-1"/> Cao Thủ
                   </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    <FaHeart className="mr-1" /> Kiên Trì
+                                    <span
+                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    <FaHeart className="mr-1"/> Kiên Trì
                   </span>
                                 </div>
                             </div>
@@ -106,8 +113,9 @@ const Home: React.FC = () => {
                         <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-gray-400">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
-                                        <FaMedal className="text-gray-400 text-2xl" />
+                                    <div
+                                        className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
+                                        <FaMedal className="text-gray-400 text-2xl"/>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Trần Thị B</h3>
@@ -121,11 +129,13 @@ const Home: React.FC = () => {
                             </div>
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                    <FaStar className="mr-1" /> Quyết Tâm
+                  <span
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                    <FaStar className="mr-1"/> Quyết Tâm
                   </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                    <FaFire className="mr-1" /> Tiến Bộ
+                                    <span
+                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
+                    <FaFire className="mr-1"/> Tiến Bộ
                   </span>
                                 </div>
                             </div>
@@ -133,8 +143,9 @@ const Home: React.FC = () => {
                         <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-orange-400">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <FaAward className="text-orange-400 text-2xl" />
+                                    <div
+                                        className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <FaAward className="text-orange-400 text-2xl"/>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-xl font-bold text-gray-900">Lê Văn C</h3>
@@ -148,11 +159,13 @@ const Home: React.FC = () => {
                             </div>
                             <div className="mt-6 flex justify-between items-center">
                                 <div className="flex space-x-2">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                    <FaBolt className="mr-1" /> Nỗ Lực
+                  <span
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                    <FaBolt className="mr-1"/> Nỗ Lực
                   </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                    <FaSun className="mr-1" /> Tích Cực
+                                    <span
+                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                    <FaSun className="mr-1"/> Tích Cực
                   </span>
                                 </div>
                             </div>
@@ -196,36 +209,42 @@ const Home: React.FC = () => {
                     <div className="mt-16">
                         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                             <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
+                                <div
+                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
                                     <span className="text-2xl font-bold">1</span>
                                 </div>
                                 <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
                                     Lập Kế Hoạch Cá Nhân
                                 </h3>
                                 <p className="mt-4 text-gray-600 text-center">
-                                    Làm bài đánh giá và nhận kế hoạch cai thuốc lá được cá nhân hóa phù hợp với thói quen và lối sống của bạn.
+                                    Làm bài đánh giá và nhận kế hoạch cai thuốc lá được cá nhân hóa phù hợp với thói
+                                    quen và lối sống của bạn.
                                 </p>
                             </div>
                             <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
+                                <div
+                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
                                     <span className="text-2xl font-bold">2</span>
                                 </div>
                                 <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
                                     Theo Dõi Tiến Trình
                                 </h3>
                                 <p className="mt-4 text-gray-600 text-center">
-                                    Theo dõi hành trình của bạn với các công cụ dễ sử dụng, hiển thị sự cải thiện sức khỏe và số tiền tiết kiệm.
+                                    Theo dõi hành trình của bạn với các công cụ dễ sử dụng, hiển thị sự cải thiện sức
+                                    khỏe và số tiền tiết kiệm.
                                 </p>
                             </div>
                             <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
+                                <div
+                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
                                     <span className="text-2xl font-bold">3</span>
                                 </div>
                                 <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
                                     Nhận Hỗ Trợ
                                 </h3>
                                 <p className="mt-4 text-gray-600 text-center">
-                                    Kết nối với cộng đồng và các chuyên gia để được khuyến khích, tư vấn và hỗ trợ trách nhiệm.
+                                    Kết nối với cộng đồng và các chuyên gia để được khuyến khích, tư vấn và hỗ trợ trách
+                                    nhiệm.
                                 </p>
                             </div>
                         </div>
@@ -233,9 +252,9 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-            <Pricing />
+            <Pricing/>
 
-            <BlogHomePage />
+            <BlogHomePage/>
 
             {/* Support Tools Section */}
             <div id="resources" className="py-16 bg-white">
@@ -250,8 +269,9 @@ const Home: React.FC = () => {
                     </div>
                     <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaChartLine className="text-green-600" />
+                            <div
+                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                                <FaChartLine className="text-green-600"/>
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Theo Dõi Tiến Trình
@@ -266,13 +286,14 @@ const Home: React.FC = () => {
                                     aria-label="Mở Theo Dõi Tiến Trình"
                                 >
                                     Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs" />
+                                    <FaChevronRight className="ml-1 text-xs"/>
                                 </button>
                             </div>
                         </div>
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaComments className="text-green-600" />
+                            <div
+                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                                <FaComments className="text-green-600"/>
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Hỗ Trợ Trò Chuyện
@@ -287,13 +308,14 @@ const Home: React.FC = () => {
                                     aria-label="Mở Hỗ Trợ Trò Chuyện"
                                 >
                                     Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs" />
+                                    <FaChevronRight className="ml-1 text-xs"/>
                                 </button>
                             </div>
                         </div>
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaUserMd className="text-green-600" />
+                            <div
+                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                                <FaUserMd className="text-green-600"/>
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Tư Vấn Chuyên Nghiệp
@@ -308,13 +330,14 @@ const Home: React.FC = () => {
                                     aria-label="Mở Tư Vấn Chuyên Nghiệp"
                                 >
                                     Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs" />
+                                    <FaChevronRight className="ml-1 text-xs"/>
                                 </button>
                             </div>
                         </div>
                         <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaUsers className="text-green-600" />
+                            <div
+                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                                <FaUsers className="text-green-600"/>
                             </div>
                             <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
                                 Diễn Đàn Cộng Đồng
@@ -324,11 +347,11 @@ const Home: React.FC = () => {
                             </p>
                             <div className="mt-4 text-center">
                                 <Link to="/blog"
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
-                                    aria-label="Mở Diễn Đàn Cộng Đồng"
+                                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
+                                      aria-label="Mở Diễn Đàn Cộng Đồng"
                                 >
                                     Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs" />
+                                    <FaChevronRight className="ml-1 text-xs"/>
                                 </Link>
                             </div>
                         </div>
@@ -359,66 +382,78 @@ const Home: React.FC = () => {
                             <div className="space-y-6">
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-500 text-white">
-                                            <FaRegHeart />
+                                        <div
+                                            className="flex items-center justify-center h-12 w-12 rounded-md bg-red-500 text-white">
+                                            <FaRegHeart/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
-                                        <h3 className="text-lg font-medium text-gray-900">Cải Thiện Sức Khỏe Tim Mạch</h3>
+                                        <h3 className="text-lg font-medium text-gray-900">Cải Thiện Sức Khỏe Tim
+                                            Mạch</h3>
                                         <p className="mt-2 text-gray-600">
-                                            Chỉ 20 phút sau khi bỏ thuốc, nhịp tim của bạn giảm xuống. Trong vòng 3 tháng, tuần hoàn và chức năng phổi cải thiện đáng kể.
+                                            Chỉ 20 phút sau khi bỏ thuốc, nhịp tim của bạn giảm xuống. Trong vòng 3
+                                            tháng, tuần hoàn và chức năng phổi cải thiện đáng kể.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
-                                            <FaLungs />
+                                        <div
+                                            className="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
+                                            <FaLungs/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-lg font-medium text-gray-900">Phục Hồi Hô Hấp</h3>
                                         <p className="mt-2 text-gray-600">
-                                            Trong vòng 1-9 tháng, ho và khó thở giảm khi chức năng phổi cải thiện và lông mao phát triển trở lại.
+                                            Trong vòng 1-9 tháng, ho và khó thở giảm khi chức năng phổi cải thiện và
+                                            lông mao phát triển trở lại.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-200 text-yellow-500">
-                                            <FaCoins />
+                                        <div
+                                            className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-200 text-yellow-500">
+                                            <FaCoins/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-lg font-medium text-gray-900">Tự Do Tài Chính</h3>
                                         <p className="mt-2 text-gray-600">
-                                            Người hút thuốc trung bình tiết kiệm được 50-100 triệu đồng mỗi năm sau khi bỏ thuốc – số tiền có thể đầu tư vào những điều bạn thực sự yêu thích.
+                                            Người hút thuốc trung bình tiết kiệm được 50-100 triệu đồng mỗi năm sau khi
+                                            bỏ thuốc – số tiền có thể đầu tư vào những điều bạn thực sự yêu thích.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-violet-400 text-violet-600">
-                                            <MdInsertEmoticon />
+                                        <div
+                                            className="flex items-center justify-center h-12 w-12 rounded-md bg-violet-400 text-violet-600">
+                                            <MdInsertEmoticon/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
-                                        <h3 className="text-lg font-medium text-gray-900">Nâng Cao Chất Lượng Cuộc Sống</h3>
+                                        <h3 className="text-lg font-medium text-gray-900">Nâng Cao Chất Lượng Cuộc
+                                            Sống</h3>
                                         <p className="mt-2 text-gray-600">
-                                            Cải thiện vị giác và khứu giác, nhiều năng lượng hơn, làn da đẹp hơn, giảm lo âu và trầm cảm.
+                                            Cải thiện vị giác và khứu giác, nhiều năng lượng hơn, làn da đẹp hơn, giảm
+                                            lo âu và trầm cảm.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex">
                                     <div className="flex-shrink-0">
-                                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-200 text-orange-600">
-                                            <FaShieldAlt />
+                                        <div
+                                            className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-200 text-orange-600">
+                                            <FaShieldAlt/>
                                         </div>
                                     </div>
                                     <div className="ml-4">
                                         <h3 className="text-lg font-medium text-gray-900">Giảm Nguy Cơ Bệnh Tật</h3>
                                         <p className="mt-2 text-gray-600">
-                                            Sau 5-15 năm, nguy cơ đột quỵ, bệnh tim và các loại ung thư giảm mạnh, gần đạt mức của người không hút thuốc.
+                                            Sau 5-15 năm, nguy cơ đột quỵ, bệnh tim và các loại ung thư giảm mạnh, gần
+                                            đạt mức của người không hút thuốc.
                                         </p>
                                     </div>
                                 </div>
@@ -430,7 +465,8 @@ const Home: React.FC = () => {
 
             {/* CTA Section */}
             <div className="bg-green-600">
-                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                <div
+                    className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
                     <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                         <span className="block">Sẵn sàng bắt đầu hành trình của bạn?</span>
                         <span className="block text-green-200">Bắt đầu cuộc sống không khói thuốc ngay hôm nay.</span>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store.ts";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import type {RootState} from "../store/store.ts";
 import {UserCircle} from "lucide-react";
 
 const Header: React.FC = () => {
@@ -33,18 +33,18 @@ const Header: React.FC = () => {
                     <a href="/resources" className="hover:text-blue-600 hover:underline transition">
                         Tài Nguyên
                     </a>
-                    <a href="/contact" className="hover:text-blue-600 hover:underline transition">
-                        Liên Hệ
-                    </a>
+                    <Link to="/blogs" className="hover:text-blue-600 hover:underline transition">
+                        Diễn Đàn
+                    </Link>
                 </nav>
 
                 <div className="flex items-center space-x-4">
                     {
                         user ? (
-                            <div className="flex items-center space-x-2 text-gray-700">
-                                <UserCircle className="w-6 h-6" />
+                            <Link to="/profile" className="flex items-center space-x-2 text-gray-700">
+                                <UserCircle className="w-6 h-6"/>
                                 <span className="font-semibold">{user.fullName}</span>
-                            </div>
+                            </Link>
                         ) : (
                             <Link
                                 to="/login"

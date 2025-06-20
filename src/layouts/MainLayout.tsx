@@ -14,7 +14,6 @@ const MainLayout: React.FC = () => {
                     <Outlet/>
                 </main>
                 <Footer/>
-                {/*<InvalidProduct/>*/}
             </div>
         </>
     );

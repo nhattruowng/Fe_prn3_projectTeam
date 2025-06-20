@@ -6,3 +6,4 @@ export const GET_USER = "/api/Identity/user"
 export const USER_ROLE = "/api/Identity/userRole"
 export const GET_MEMBERSHIP_PACKAGE = "/api/MemberShipPackage"
 export const GET_ALL_BLOG="/api/Blog"
+
