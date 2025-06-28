@@ -35,17 +35,7 @@ const MainBlog: React.FC = () => {
 
                     {/* Image Section with Overlay */}
                     <div className="relative flex items-end flex-col overflow-hidden group">
-                        {/*/!* Text overlay *!/*/}
-                        {/*<div className="absolute top-0 left-0 bg-blue-500 w-3/4 px-8 py-10 rounded-xl z-20 transition-all duration-500 group-hover:z-10 group-hover:opacity-0">*/}
-                        {/*  <span className="block mb-6 font-bold text-white group-hover:text-orange-300">*/}
-                        {/*    HERE WE ARE*/}
-                        {/*  </span>*/}
-                        {/*    <h2 className="text-white font-bold text-2xl leading-snug">*/}
-                        {/*        What started as a tiny team mostly dedicated to Air Quality has grown.*/}
-                        {/*    </h2>*/}
-                        {/*</div>*/}
 
-                        {/* Image */}
                         <div className="rounded-xl overflow-hidden z-10 transition-all duration-700 ease-in-out group-hover:z-20 group-hover:scale-105">
                             <img
                                 src="https://picsum.photos/800/800"

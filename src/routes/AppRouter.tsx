@@ -10,6 +10,8 @@ import ProfileLayout from "../layouts/ProfileLayout.tsx";
 import {BlogLayout} from "../layouts/BlogLayout.tsx";
 import MainBlog from "../components/MainBlog.tsx";
 import {TwitterHomeFeed} from "../pages/TwitterHomeFeed.tsx";
+import Calendar from "../pages/Calendar.tsx";
+import {CalendarLayout} from "../layouts/CalendarLayout.tsx";
 
 
 const AppRouter: React.FC = () => {
@@ -31,6 +33,9 @@ const AppRouter: React.FC = () => {
                 <Route index element={<TwitterHomeFeed/>}/>
                 <Route path="blog" element={<MainBlog/>}/>
                 {/*<Route path="comment" element={<CommentScreen/>}/>*/}
+            </Route>
+            <Route path="calendar" element={<CalendarLayout/>}>
+                <Route index element={<Calendar/>}/>
             </Route>
 
         </Routes>

@@ -36,6 +36,9 @@ const Header: React.FC = () => {
                     <Link to="/blogs" className="hover:text-blue-600 hover:underline transition">
                         Diễn Đàn
                     </Link>
+                    <Link to="/calendar" className="hover:text-blue-600 hover:underline transition">
+                        Tiến Trình
+                    </Link>
                 </nav>
 
                 <div className="flex items-center space-x-4">

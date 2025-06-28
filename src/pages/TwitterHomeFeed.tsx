@@ -100,7 +100,7 @@ export const TwitterHomeFeed: React.FC = () => {
     return (
         <>
             <div className="bg-white min-h-screen">
-                <div className="max-w-2xl mx-auto border-x border-gray-700">
+                <div className="max-w-2xl mx-auto border-x ">
                     <div>
                         {tweets.map((tweet) => (
                             <TweetCard key={tweet.id} tweet={tweet}/>

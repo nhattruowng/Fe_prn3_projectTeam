@@ -346,7 +346,7 @@ const Home: React.FC = () => {
                                 Kết nối với những người cùng hành trình để nhận mẹo, động lực và tình bạn.
                             </p>
                             <div className="mt-4 text-center">
-                                <Link to="/blog"
+                                <Link to="/blogs"
                                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
                                       aria-label="Mở Diễn Đàn Cộng Đồng"
                                 >

@@ -1,9 +1,9 @@
 import {useGetAllMembershipPackage} from "../hooks/MemberShipPackageHooks.ts";
-import type {GetAllMembershipPackageRequest} from "../modole/request/GetAllMembershipPackageRequest.ts";
-import {useMemo} from "react";
-import type {MemberShipPackage} from "../modole/entity/MemberShipPackage.ts";
+import type {MembershipPackageRequest} from "../modole/request/MembershipPackageRequest.ts";
+import React, {useEffect, useMemo} from "react";
 import {useCheckUserExist} from "../utils/UnitAuthentication.ts";
 import {useNavigate} from "react-router-dom";
+import type {MemberShipPackageResponse} from "../modole/respont/MemberShipPackageRespont.ts";
 
 export const Pricing: React.FC = () => {
 
@@ -11,15 +11,18 @@ export const Pricing: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const filter = useMemo<GetAllMembershipPackageRequest>(() => ({
+    const filter = useMemo<MembershipPackageRequest>(() => ({
         PageNumber: 1,
         PageSize: 3,
         Name: "",
         Type: null,
         Description: ""
     }), []);
-    const {data, loading} = useGetAllMembershipPackage(filter);
+    const {data, loading, run} = useGetAllMembershipPackage();
 
+    useEffect(() => {
+        run(filter);
+    }, [filter]);
 
     const handleClick = () => {
         navigate(checkUser ? "/" : "/login");
@@ -27,7 +30,6 @@ export const Pricing: React.FC = () => {
     const parseFeatures = (features: string): string[] => {
         return features ? features.split(',').map(feature => feature.trim()) : [];
     };
-
 
     return (
         <section className="px-4 sm:px-8 py-24 bg-gray-50">
@@ -46,7 +48,7 @@ export const Pricing: React.FC = () => {
                     </div>
                     <div className="mt-12 max-w-7xl mx-auto">
                         <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            {data?.data.items.map((plan: MemberShipPackage, index: number) => (
+                            {data?.items.map((plan: MemberShipPackageResponse, index: number) => (
                                 <div
                                     key={plan.id || index}
                                     className="flex flex-col rounded-xl bg-white shadow-lg border border-gray-200 transition-transform hover:scale-105"
