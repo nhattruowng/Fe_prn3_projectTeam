@@ -22,8 +22,7 @@ const SignUp: React.FC = () => {
             onSuccess: () => {
                 setTimeout(() => navigate("/login"), 1500);
             },
-            onError: (error: any) => {
-                console.error("Lỗi server:", error);
+            onError: () => {
                 setMessage("Lỗi không mong muốn");
                 alert("lỖI KHÔNG MONG MUỐN!" + "kIỂM TRA LẠI EMAIL HOẶT PASSWORD")
                 setPassword("");

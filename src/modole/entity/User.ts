@@ -4,4 +4,5 @@ export interface User {
     email: string;
     gender: string;
     accessToken: string;
+    userImage:string;
 }

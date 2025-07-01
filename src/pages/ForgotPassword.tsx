@@ -6,9 +6,12 @@ const ForgotPassword: React.FC = () => {
     const [code, setCode] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [formError, setFormError] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [formError, setFormError] = useState<string | null>("");
+    const [successMessage, setSuccessMessage] = useState<string | null>("");
     const isCodeStep = successMessage === "Success";
+
+    setFormError(null);
+    setSuccessMessage(null);
 
     return (
         <div className="flex flex-col justify-center items-center bg-white h-screen">

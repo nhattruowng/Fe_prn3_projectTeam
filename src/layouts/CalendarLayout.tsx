@@ -1,9 +1,8 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
 import Header from "../components/Header.tsx";
-import Footer from "../components/Footer.tsx";
 
-const MainLayout: React.FC = () => {
+export const CalendarLayout: React.FC = () => {
     return (
         <>
             <div className="min-h-screen flex flex-col">
@@ -13,9 +12,7 @@ const MainLayout: React.FC = () => {
                 <main className="pt-[85px] flex-1">
                     <Outlet/>
                 </main>
-                <Footer/>
             </div>
         </>
     );
 }
-export default MainLayout;
