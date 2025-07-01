@@ -41,8 +41,8 @@ const AppRouter: React.FC = () => {
             </Route>
 
 
-            <Route path="/payment-success" element={<PaymentSuccess/>}/>
-            <Route path="/payment-error" element={<PaymentError/>}/>
+            <Route path="payment-success" element={<PaymentSuccess/>}/>
+            <Route path="payment-error" element={<PaymentError/>}/>
 
 
         </Routes>
