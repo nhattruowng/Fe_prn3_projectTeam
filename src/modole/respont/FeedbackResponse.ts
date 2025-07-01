@@ -5,4 +5,5 @@ export interface Comments {
     userName:string;
     comment:string;
     createdTime:string;
+    userImage:string;
 }

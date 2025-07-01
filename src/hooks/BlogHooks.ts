@@ -3,7 +3,7 @@ import {
     CreatNewBlog,
     DeleteBlog,
     GetAllBlog,
-    GetBlog,
+    GetBlog, GetBlogAuthorAPI,
     RejectBlog,
     UpdateBlog,
     ViewBlog
@@ -43,4 +43,8 @@ export const useRejectBlog = () => {
 
 export const useViewBlog = () => {
     return useApiHandler(ViewBlog);
+}
+
+export const useGetBlogAuthor = () => {
+   return useApiHandler(GetBlogAuthorAPI);
 }

@@ -28,9 +28,9 @@ import {BlogHomePage} from "../components/BlogHomePage.tsx";
 const Home: React.FC = () => {
     const [modalOpen, setModalOpen] = useState<string | null>(null);
 
-    console.log(modalOpen)
-
     const openModal = (title: string) => setModalOpen(title);
+
+    console.log(modalOpen);
 
     return (
         <div className="min-h-screen bg-gray-100 font-sans">

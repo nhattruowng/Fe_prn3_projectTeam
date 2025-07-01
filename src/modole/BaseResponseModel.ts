@@ -1,5 +1,5 @@
-export type BaseResponse<T = any> = {
-    data?: T | string[];
+export type BaseResponse<T> = {
+    data?: T;
     additionalData?: any;
     message?: string;
     statusCode: number;

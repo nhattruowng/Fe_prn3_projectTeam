@@ -9,7 +9,7 @@ export const LoginApi = async ({email, password}: LoginDto): Promise<User | Exce
         email,
         password
     })
-    return res.data;
+    return res.data.data as User;
 }
 
 export const RegisterApi = async ({email, password}: RegisterDto): Promise<RegisterRespont | ExceptionResponse> => {

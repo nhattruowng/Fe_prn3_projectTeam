@@ -12,6 +12,9 @@ import MainBlog from "../components/MainBlog.tsx";
 import {TwitterHomeFeed} from "../pages/TwitterHomeFeed.tsx";
 import Calendar from "../pages/Calendar.tsx";
 import {CalendarLayout} from "../layouts/CalendarLayout.tsx";
+import {CardsPricingList} from "../components/CardsPricingList.tsx";
+import {PaymentSuccess} from "../pages/PaymentSuccess.tsx";
+import {PaymentError} from "../pages/PaymentError.tsx";
 
 
 const AppRouter: React.FC = () => {
@@ -20,7 +23,7 @@ const AppRouter: React.FC = () => {
         <Routes>
             <Route path="/" element={<MainLayout/>}>
                 <Route index element={<Home/>}/>
-
+                <Route path="cards-pricing" element={<CardsPricingList/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<SignUp/>}/>
@@ -32,11 +35,15 @@ const AppRouter: React.FC = () => {
             <Route path="blogs" element={<BlogLayout/>}>
                 <Route index element={<TwitterHomeFeed/>}/>
                 <Route path="blog" element={<MainBlog/>}/>
-                {/*<Route path="comment" element={<CommentScreen/>}/>*/}
             </Route>
             <Route path="calendar" element={<CalendarLayout/>}>
                 <Route index element={<Calendar/>}/>
             </Route>
+
+
+            <Route path="/payment-success" element={<PaymentSuccess/>}/>
+            <Route path="/payment-error" element={<PaymentError/>}/>
+
 
         </Routes>
     );

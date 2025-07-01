@@ -21,11 +21,11 @@ export const GetMemberShipPackageApi = async ({
             Description
         }
     });
-    return res.data.data;
+    return res.data;
 }
 
 
-export const CreatNewMemberShipPackage = async (CreatMemberShipPackage: CreatMemberShipPackage, token: string): Promise<BaseResponse> => {
+export const CreatNewMemberShipPackage = async (CreatMemberShipPackage: CreatMemberShipPackage, token: string): Promise<BaseResponse<string>> => {
     const res = await api.post(MEMBERSHIP_PACKAGE_API, CreatMemberShipPackage, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -40,7 +40,7 @@ export const getMemberShipPackageById = async (id: string): Promise<BaseResponse
 }
 
 
-export const EditMemberShipPackage = async (id: string, CreatMemberShipPackage: CreatMemberShipPackage, token: string): Promise<BaseResponse> => {
+export const EditMemberShipPackage = async (id: string, CreatMemberShipPackage: CreatMemberShipPackage, token: string): Promise<BaseResponse<string>> => {
     const res = await api.post(`${MEMBERSHIP_PACKAGE_API}/${id}`, CreatMemberShipPackage, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ export const EditMemberShipPackage = async (id: string, CreatMemberShipPackage: 
     return res.data;
 }
 
-export const DeleteMemberShipPackage = async (id: string, token: string): Promise<BaseResponse> => {
+export const DeleteMemberShipPackage = async (id: string, token: string): Promise<BaseResponse<string>> => {
     const res = await api.delete(`${MEMBERSHIP_PACKAGE_API}/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`

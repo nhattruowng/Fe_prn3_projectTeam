@@ -1,5 +1,5 @@
 import type {GetBlogRespont} from "../modole/respont/BlogRespont.ts";
-import type {BlogFillterRequet, CreatBlog} from "../modole/request/BlogFillterRequet.ts";
+import type {BlogFillterRequet, CreatBlog, GetBlogAuthor} from "../modole/request/BlogFillterRequet.ts";
 import api from "./api.ts";
 import {BLOG_API} from "../../EndPoint.ts";
 import type {BaseResponse, PaginatedList} from "../modole/BaseResponseModel.ts";
@@ -30,7 +30,7 @@ export const GetAllBlog = async ({
             status
         }
     })
-    return res.data.data;
+    return res.data;
 }
 
 export const DeleteBlog = async (id: string,
@@ -55,7 +55,7 @@ export const UpdateBlog = async (id: string,
     return res.data;
 }
 
-export const GetBlog = async (id: string): Promise<BaseResponse<BaseResponse<GetBlogRespont>>> => {
+export const GetBlog = async (id: string): Promise<BaseResponse<GetBlogRespont>> => {
     const res = await api.get(`${BLOG_API}/${id}`, {
         headers: {
             Accept: "application/json"
@@ -65,7 +65,7 @@ export const GetBlog = async (id: string): Promise<BaseResponse<BaseResponse<Get
 }
 
 
-export const ApproveBlog = async (id: string, token: string): Promise<{ statusCode: number, result: BaseResponse }> => {
+export const ApproveBlog = async (id: string, token: string): Promise<any> => {
     const res = await api.patch(`${BLOG_API}/${id}/approve`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -74,7 +74,7 @@ export const ApproveBlog = async (id: string, token: string): Promise<{ statusCo
     return res.data;
 }
 
-export const RejectBlog = async (id: string, token: string): Promise<{ statusCode: number, result: BaseResponse }> => {
+export const RejectBlog = async (id: string, token: string): Promise<any> => {
     const res = await api.patch(`${BLOG_API}/${id}/reject`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -83,10 +83,23 @@ export const RejectBlog = async (id: string, token: string): Promise<{ statusCod
     return res.data;
 }
 
-export const ViewBlog = async (id: string, token: string): Promise<BaseResponse<BaseResponse>> => {
+export const ViewBlog = async (id: string, token: string): Promise<BaseResponse<string>> => {
     const res = await api.put(`${BLOG_API}/${id}/view`, {
         headers: {
             Authorization: `Bearer ${token}`
+        }
+    })
+    return res.data;
+}
+
+export const GetBlogAuthorAPI = async (GetBlogAuthor: GetBlogAuthor): Promise<PaginatedList<GetBlogRespont>> => {
+    const res = await api.get(`${BLOG_API}/author`, {
+        params: {
+            authorId:GetBlogAuthor.authorId,
+            PageNumber:GetBlogAuthor.PageNumber,
+            PageSize:GetBlogAuthor.PageSize,
+        }, headers: {
+            Authorization: `Bearer ${GetBlogAuthor.token}`
         }
     })
     return res.data;

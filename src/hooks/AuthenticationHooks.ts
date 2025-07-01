@@ -15,6 +15,7 @@ export const useLogin = () => {
             password
         }),
         onSuccess: (data: User | ExceptionResponse) => {
+            console.log(data);
             if ("accessToken" in data) {
                 dispatch(setUser(data));
                 console.log(data);

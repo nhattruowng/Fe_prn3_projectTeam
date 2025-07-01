@@ -9,7 +9,7 @@ export const CreateFeedback = async ({
                                          comment,
                                          blogId
                                      }: CreatFeedback,
-                                     token: string): Promise<BaseResponse<BaseResponse>> => {
+                                     token: string): Promise<BaseResponse<BaseResponse<any>>> => {
     const res = await api.post(`${FEEDBACK_API}`, {blogId, comment}, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export const CreateFeedback = async ({
 
 export const EditFeedback = async (id: string,
                                    {comment, blogId}: CreatFeedback,
-                                   token: string): Promise<BaseResponse<BaseResponse>> => {
+                                   token: string): Promise<BaseResponse<BaseResponse<any>>> => {
     const res = await api.put(`${FEEDBACK_API}/${id}`, {blogId, comment}, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ export const EditFeedback = async (id: string,
 
 
 export const DeleteFeedback = async (id: string,
-                                     token: string): Promise<BaseResponse<BaseResponse>> => {
+                                     token: string): Promise<BaseResponse<BaseResponse<any>>> => {
     const res = await api.delete(`${FEEDBACK_API}/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -56,7 +56,8 @@ export const GetFeedbackByBlogId = async (id: string,
             PageSize,
         }
     })
-    return res.data;
+    console.log(res)
+    return res.data.data;
 }
 
 export const GetFeedbackByUserId = async (id: string,

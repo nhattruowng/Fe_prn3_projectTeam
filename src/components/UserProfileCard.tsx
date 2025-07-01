@@ -1,12 +1,71 @@
 import {FaEnvelope, FaMapMarkerAlt, FaUser} from "react-icons/fa";
-import {useState} from "react";
-import {TwitterHomeFeed} from "../pages/TwitterHomeFeed.tsx";
+import {useEffect, useMemo, useState} from "react";
 import Calendar from "../pages/Calendar.tsx";
 import BadgeTimeline from "./BadgeTimeline.tsx";
 import DailyStatsChart from "./DailyStatsChart.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import type {RootState} from "../store/store.ts";
+import {useNavigate} from "react-router-dom";
+import {useGetBlogAuthor} from "../hooks/BlogHooks.ts";
+import {TweetCard} from "./TweetCard.tsx";
+import type {GetBlogRespont} from "../modole/respont/BlogRespont.ts";
+import {useInfiniteScroll} from "../hooks/useInfiniteScroll.ts";
+import {clearUser} from "../store/userSlice.ts.ts";
+import type {GetBlogAuthor} from "../modole/request/BlogFillterRequet.ts";
 
 export default function UserProfileCard() {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<string>("Quá Trình");
+    const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.user.user);
+    const [list, setList] = useState<GetBlogRespont[]>([]);
+
+    const {run, data, loading} = useGetBlogAuthor();
+
+    const [page, setPage] = useState<number>(1)
+
+    const fillter = useMemo<GetBlogAuthor>(() => ({
+        token: user?.accessToken ?? "",
+        authorId: "",
+        PageNumber: page,
+        PageSize: 20
+    }), [page, user?.accessToken]);
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        }
+    }, [user]);
+
+    const {observerRef} = useInfiniteScroll({
+        loading,
+        onLoadMore: () => setPage(prev => prev + 1),
+    });
+
+    useEffect(() => {
+        if (activeTab === "Bài Viết") {
+            run(fillter);
+        }
+    }, [activeTab, fillter]);
+
+
+    console.log(data)
+
+    useEffect(() => {
+        if (data?.items && activeTab === "Bài Viết") {
+            setList(prev => {
+                const ids = new Set(prev.map(item => item.id));
+                const newItems = data.items.filter(item => !ids.has(item.id));
+                return [...prev, ...newItems];
+            });
+        }
+    }, [data?.items, activeTab]);
+
+
+    const handleLogout = () => {
+        dispatch(clearUser());
+    }
+
 
     return (
         <div className="bg-white rounded-2xl p-6 text-black shadow-lg w-full max-w-6xl mx-auto relative">
@@ -15,20 +74,21 @@ export default function UserProfileCard() {
                 <div className="flex flex-col justify-between space-y-4 flex-1">
                     <div className="flex items-center gap-2">
                         <button className="bg-green-200 hover:bg-green-400 px-4 py-1 rounded-lg">Sửa</button>
-                        <button className="bg-gray-200 hover:bg-gray-400 px-4 py-1 rounded-lg">Đăng xuất</button>
+                        <button onClick={handleLogout}
+                                className="bg-gray-200 hover:bg-gray-400 px-4 py-1 rounded-lg">Đăng xuất
+                        </button>
                     </div>
 
                     <div>
                         <div className="flex items-center gap-2 text-xl font-bold">
-                            Max Smith <FaUser className="text-blue-500"/>
+                            {user?.fullName} <FaUser className="text-blue-500"/>
                         </div>
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                            <FaEnvelope/> <span>max@kt.com</span>
+                            <FaEnvelope/> <span>{user?.email}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                            <FaMapMarkerAlt/> <span>SF, Bay Area</span>
+                            <FaMapMarkerAlt/> <span>{user?.gender}</span>
                         </div>
-                        <div className="text-sm text-gray-500">Developer</div>
                     </div>
 
                     <div>
@@ -44,7 +104,7 @@ export default function UserProfileCard() {
 
                 <div className="flex-shrink-0 relative">
                     <img
-                        src="https://randomuser.me/api/portraits/men/75.jpg"
+                        src={user?.userImage}
                         className="w-24 h-24 rounded-xl object-cover"
                         alt="avatar"
                     />
@@ -80,14 +140,19 @@ export default function UserProfileCard() {
                 ))}
             </div>
 
-            {/* Tab content */}
             <div className="mt-4">
                 {activeTab === "Bài Viết" && (
                     <div className="mt-4">
                         <div className="max-h-[500px] overflow-y-auto pr-2">
                             <div
                                 className="space-y-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
-                                <TwitterHomeFeed/>
+                                {list.map((tweet) => (
+                                    <TweetCard key={tweet.id} tweet={tweet}/>
+                                ))}
+                                {loading && (
+                                    <div className="text-center text-gray-500 py-4">Đang tải...</div>
+                                )}
+                                <div ref={observerRef} className="h-10"></div>
                             </div>
                         </div>
                     </div>
