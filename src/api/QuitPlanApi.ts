@@ -1,10 +1,10 @@
 import api from "./api.ts";
 import {QUITPLAN_API} from "../../EndPoint.ts";
+import type {QuitPlanRequest} from "../modole/request/QuitPlanRequest.ts";
+import type {BaseResponse} from "../modole/BaseResponseModel.ts";
 
-export const CreateQuitPlan = async (reason: string, token: string): Promise<any> => {
-    const res = await api.post(`${QUITPLAN_API}`, {
-        reason: reason,
-    }, {
+export const CreateQuitPlan = async (QuitPlanRequest: QuitPlanRequest, token: string): Promise<BaseResponse<string>> => {
+    const res = await api.post(`${QUITPLAN_API}`, QuitPlanRequest, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
@@ -26,5 +26,5 @@ export const DeleteQuitPlan = async (id: string, token: string) => {
 }
 
 export const UpdateQuitPlan = async () => {
-  
+
 }

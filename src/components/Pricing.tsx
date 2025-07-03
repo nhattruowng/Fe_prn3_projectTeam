@@ -10,6 +10,7 @@ export const Pricing: React.FC = () => {
     const checkUser = useCheckUserExist();
     const navigate = useNavigate();
     const [open, setOpen] = useState<boolean>(false);
+    const [id, setId] = useState<string>("");
 
     const filter = useMemo<MembershipPackageRequest>(() => ({
         PageNumber: 1,
@@ -24,10 +25,11 @@ export const Pricing: React.FC = () => {
         run(filter);
     }, [filter]);
 
-    const handleClick = () => {
+    const handleClick = (id: string) => {
         if (!checkUser) {
             navigate("/login");
         }
+        setId(id);
         setOpen(true);
     };
     const parseFeatures = (features: string): string[] => {
@@ -96,8 +98,7 @@ export const Pricing: React.FC = () => {
                                                 className="mt-6 w-full py-2.5 px-4 text-xs font-bold text-green-500 uppercase border border-green-500 rounded-lg hover:bg-green-50 focus:ring focus:ring-green-200 active:opacity-85 transition-colors"
                                                 type="button"
                                                 onClick={() => {
-                                                    // setOpen(true);
-                                                    handleClick();
+                                                    handleClick(plan.id);
                                                 }}
 
                                             >
@@ -112,7 +113,7 @@ export const Pricing: React.FC = () => {
                 )}
             </section>
 
-            {open && (<FormInputs open={open} onClose={() => setOpen(false)} id=""/>)}
+            {open && (<FormInputs open={open} onClose={() => setOpen(false)} id={id}/>)}
         </>
 
     );

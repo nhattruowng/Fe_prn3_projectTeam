@@ -1,13 +1,17 @@
 import api from "./api.ts";
 import {USERPACKAGE_API} from "../../EndPoint.ts";
+import type {BaseResponse} from "../modole/BaseResponseModel.ts";
 
 
-export const CreateNewUserPackage = async (membershipPackageId: string, token: string): Promise<string> => {
-    const res = await api.post(`${USERPACKAGE_API}/register`, {membershipPackageId}, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
+export const CreateNewUserPackage = async (membershipPackageId: string, token: string): Promise<BaseResponse<string>> => {
+    const res = await api.post(`${USERPACKAGE_API}/register`,
+        {
+            membershipPackageId: membershipPackageId
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
     return res.data;
 }
 

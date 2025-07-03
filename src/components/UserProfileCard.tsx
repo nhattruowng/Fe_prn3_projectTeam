@@ -49,8 +49,6 @@ export default function UserProfileCard() {
     }, [activeTab, fillter]);
 
 
-    console.log(data)
-
     useEffect(() => {
         if (data?.items && activeTab === "Bài Viết") {
             setList(prev => {
@@ -63,7 +61,10 @@ export default function UserProfileCard() {
 
 
     const handleLogout = () => {
-        dispatch(clearUser());
+        const confirmed = window.confirm("Bạn có chắc chắn muốn đăng xuất không?");
+        if (confirmed) {
+            dispatch(clearUser());
+        }
     }
 
 
