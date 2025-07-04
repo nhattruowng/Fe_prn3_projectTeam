@@ -101,7 +101,7 @@ export default function CommentDialog({GetBlogRespont, onClose}: Prop) {
 
                                     <div className="mt-2 text-xs text-gray-400 flex gap-4">
                                         <span>Tác giả: {dataBlog?.data?.authorName || 'Ẩn danh'}</span>
-                                        <span>Lượt xem: {dataBlog?.data?.status}</span>
+                                        <span>Lượt xem: {dataBlog?.data?.views}</span>
                                         <span>Ngày đăng: {dataBlog?.data?.publishedDate}</span>
                                     </div>
                                 </div>

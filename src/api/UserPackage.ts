@@ -1,6 +1,7 @@
 import api from "./api.ts";
 import {USERPACKAGE_API} from "../../EndPoint.ts";
 import type {BaseResponse} from "../modole/BaseResponseModel.ts";
+import type {CurrentResponse} from "../modole/respont/CurrentResponse.ts";
 
 
 export const CreateNewUserPackage = async (membershipPackageId: string, token: string): Promise<BaseResponse<string>> => {
@@ -16,7 +17,7 @@ export const CreateNewUserPackage = async (membershipPackageId: string, token: s
 }
 
 
-export const GetUserPackageCurrent = async (token: string): Promise<string> => {
+export const GetUserPackageCurrent = async (token: string): Promise<BaseResponse<CurrentResponse>> => {
     const res = await api.get(`${USERPACKAGE_API}/current`, {
         headers: {
             Authorization: `Bearer ${token}`

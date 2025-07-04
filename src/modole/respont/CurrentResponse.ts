@@ -1,0 +1,17 @@
+export interface CurrentResponse {
+    id: string,
+    userId: string,
+    fullName: string,
+    packageId: string,
+    packageName: string,
+    startDate: string,
+    endDate: string,
+    isActive: boolean,
+    cancelledDate: string,
+    price: number,
+    type: string,
+    description: string,
+    features: string,
+    remainingDays: number,
+    isExpired: boolean,
+}

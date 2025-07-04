@@ -23,9 +23,14 @@ import {
 import {MdInsertEmoticon} from "react-icons/md";
 import {Pricing} from "../components/Pricing.tsx";
 import {BlogHomePage} from "../components/BlogHomePage.tsx";
+import {useSelector} from "react-redux";
+import type {RootState} from "../store/store.ts";
 
 
 const Home: React.FC = () => {
+
+    const user = useSelector((state: RootState) => state.user.user)
+
     const [modalOpen, setModalOpen] = useState<string | null>(null);
 
     const openModal = (title: string) => setModalOpen(title);
@@ -56,12 +61,23 @@ const Home: React.FC = () => {
                                 quả của chúng tôi.
                             </p>
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                                <Link
-                                    to="/signup"
-                                    className="px-8 py-3 text-base font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 md:py-4 md:text-lg md:px-10"
-                                >
-                                    Bắt Đầu Hành Trình
-                                </Link>
+                                {
+                                    user?.accessToken ? (
+                                        <Link
+                                            to="/signup"
+                                            className="px-8 py-3 text-base font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 md:py-4 md:text-lg md:px-10"
+                                        >
+                                            Xem Dịch Vụ
+                                        </Link>
+                                    ) : (
+                                        <Link
+                                            to="/signup"
+                                            className="px-8 py-3 text-base font-medium rounded-md text-white bg-gray-400 hover:bg-gray-600 md:py-4 md:text-lg md:px-10"
+                                        >
+                                            Bắt Đầu Hành Trình
+                                        </Link>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
@@ -171,27 +187,7 @@ const Home: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Weekly Progress Stats */}
-                    <div className="mt-12 bg-white rounded-lg shadow-md p-8">
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-green-600">1.234</div>
-                                <p className="mt-2 text-sm text-gray-600">Người đang cai thuốc</p>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-green-600">89%</div>
-                                <p className="mt-2 text-sm text-gray-600">Tỷ lệ thành công</p>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-green-600">456M</div>
-                                <p className="mt-2 text-sm text-gray-600">Tổng tiền tiết kiệm</p>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-green-600">78K</div>
-                                <p className="mt-2 text-sm text-gray-600">Điếu thuốc không hút</p>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 

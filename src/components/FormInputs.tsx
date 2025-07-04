@@ -3,8 +3,7 @@ import {useSelector} from "react-redux";
 import type {RootState} from "../store/store.ts";
 import {useCreateQuitPlan} from "../hooks/QuitPlanHooks.ts";
 import type {QuitPlanRequest} from "../modole/request/QuitPlanRequest.ts";
-import {useCreateNewUserPackage} from "../hooks/UsePackageHooks.ts";
-import {usePaymentReturn} from "../hooks/usePaymentHooks.ts";
+import {useCreateNewUserPackage, useGetUserPackageCurrent} from "../hooks/UsePackageHooks.ts";
 
 type Props = {
     open?: boolean;
@@ -39,32 +38,49 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
     } = useCreateNewUserPackage();
 
     const {
-        run: runPaymentReturn,
-        data: paymentReturn,
-    } = usePaymentReturn();
+        run: GetUserPackageCurrent,
+        data: getUserPackageCurrent,
+    } = useGetUserPackageCurrent();
 
+    // ✅ Gọi API lấy gói hiện tại
+    useEffect(() => {
+        const fetch = async () => {
+            if (token) await GetUserPackageCurrent(token);
+        };
+        fetch();
+    }, [token]);
+
+    // ✅ Khi checkbox xác nhận được chọn
     const handleConfirm = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
+        setConfirmed(isChecked);
+
         if (isChecked && !block) {
-            await runCreateNewUserPackage(id, token).then(() => {
-                setConfirmed(true);
+            if (getUserPackageCurrent?.data?.isActive) {
+                setMessage("Bạn đã có gói hiện tại đang hoạt động.");
                 setBlock(true);
-                setMessage("✔️ Xác nhận thành công!");
-            });
+                console.log(getUserPackageCurrent)
+                return;
+            }
+
+            await runCreateNewUserPackage(id, token);
         }
     };
 
-    useEffect(() => {
-        runPaymentReturn().then(value => value);
-        console.log(paymentReturn)
-    }, []);
-
+    // ✅ Mở tab thanh toán nếu có đường dẫn
     useEffect(() => {
         if (createNewUserPackage?.message?.startsWith("http")) {
             window.open(createNewUserPackage.message, "_blank");
         }
     }, [createNewUserPackage]);
 
+    // ✅ Submit form kế hoạch
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        await runCreateQuitPlan(formData, token);
+    };
+
+    // ✅ Xử lý nhập liệu
     const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({
             ...prev,
@@ -80,22 +96,11 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        await runCreateQuitPlan(formData, token);
-    };
-
-    if (dataCreateQuitPlan != null) {
-        window.alert(dataCreateQuitPlan.message);
-        onClose?.();
-    }
-
     return (
         <>
             {open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg relative">
-                        {/* Close button */}
                         <button
                             onClick={onClose}
                             className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl"
@@ -116,8 +121,7 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
                                     disabled={block || loadingCreateNewUserPackage}
                                 />
                                 {loadingCreateNewUserPackage && (
-                                    <div
-                                        className="absolute left-0 top-0 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                                    <div className="absolute left-0 top-0 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                                 )}
                             </div>
                             <label htmlFor="confirm" className="text-sm font-medium text-gray-900">
@@ -126,16 +130,12 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
                         </div>
 
                         {message && (
-                            <div
-                                className={`text-sm mb-4 font-medium ${
-                                    confirmed ? "text-green-600" : "text-red-500"
-                                }`}
-                            >
+                            <div className={`text-sm mb-4 font-medium ${block ? "text-red-500" : "text-green-600"}`}>
                                 {message}
                             </div>
                         )}
 
-                        {confirmed && paymentReturn?.data?.isSuccess && (
+                        {confirmed && !block && (
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="flex flex-col">
                                     <label htmlFor="reason" className="text-sm font-medium text-gray-900 mb-1">
