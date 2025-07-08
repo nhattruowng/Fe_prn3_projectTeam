@@ -1,4 +1,4 @@
-import {CreateQuitPlan, DeleteQuitPlan} from "../api/QuitPlanApi.ts";
+import {CreateQuitPlan, DeleteQuitPlan, GetQuitPlan} from "../api/QuitPlanApi.ts";
 import {useApiHandler} from "../api/useApiHandler.ts";
 
 
@@ -9,4 +9,8 @@ export const useCreateQuitPlan = () => {
 
 export const useDeleteQuitPlan = () => {
     return useApiHandler(DeleteQuitPlan);
+}
+
+export const useGetAllQuitPlans = () => {
+   return useApiHandler(GetQuitPlan);
 }

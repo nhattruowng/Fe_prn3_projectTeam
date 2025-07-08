@@ -1,7 +1,9 @@
-import {useState} from "react";
-import {useCreateNewUserPackage} from "../hooks/UsePackageHooks.ts";
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import type {RootState} from "../store/store.ts";
+import {useCreateQuitPlan} from "../hooks/QuitPlanHooks.ts";
+import type {QuitPlanRequest} from "../modole/request/QuitPlanRequest.ts";
+import {useCreateNewUserPackage, useGetUserPackageCurrent} from "../hooks/UsePackageHooks.ts";
 
 type Props = {
     open?: boolean;
@@ -11,47 +13,92 @@ type Props = {
 
 export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
     const user = useSelector((state: RootState) => state.user.user);
+    const token = user?.accessToken ?? "";
+
     const [confirmed, setConfirmed] = useState(false);
-    const [block, setBlock] = useState<boolean>(false);
-    const [formData, setFormData] = useState({
-        reason: "",
-        frequency: "",
-        years: "",
-    });
+    const [block, setBlock] = useState(false);
     const [message, setMessage] = useState("");
 
-    const {run, loading, data} = useCreateNewUserPackage();
+    const [formData, setFormData] = useState<QuitPlanRequest>({
+        reason: "",
+        cigarettesPerDayBeforeQuit: 0,
+        yearsSmokingBeforeQuit: 0,
+    });
+
+    const {
+        run: runCreateQuitPlan,
+        loading: loadingCreateQuitPlan
+    } = useCreateQuitPlan();
+
+    const {
+        run: runCreateNewUserPackage,
+        loading: loadingCreateNewUserPackage,
+        data: createNewUserPackage,
+    } = useCreateNewUserPackage();
+
+    const {
+        run: GetUserPackageCurrent,
+        data: getUserPackageCurrent,
+    } = useGetUserPackageCurrent();
+
+    // Gọi API lấy gói hiện tại
+    useEffect(() => {
+        if (token) {
+            GetUserPackageCurrent(token);
+        }
+    }, [token]);
+
+    // Cập nhật trạng thái block/confirm/message theo gói
+    useEffect(() => {
+        if (getUserPackageCurrent?.statusCode === 200) {
+            if (getUserPackageCurrent.data?.isActive) {
+                setBlock(true);
+                setMessage("Bạn đã có gói hiện tại đang hoạt động.");
+            } else {
+                setBlock(false);
+                setMessage("");
+            }
+        }
+    }, [getUserPackageCurrent]);
+
+
+    useEffect(() => {
+        if (createNewUserPackage?.message?.startsWith("http")) {
+            window.open(createNewUserPackage.message, "_blank");
+        }
+    }, [createNewUserPackage]);
 
     const handleConfirm = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
-        if (isChecked && !block) {
-            setMessage(""); // reset thông báo
-            await run(id, user?.accessToken ?? "");
 
-            if (data != null) {
+        if (isChecked) {
+            if (!block) {
+                await runCreateNewUserPackage(id, token);
                 setConfirmed(true);
-                setBlock(true);
-                setMessage("Xác nhận thành công!");
-            } else {
-                setConfirmed(false);
-                setMessage("Đăng ký thất bại. Vui lòng thử lại!");
             }
+        } else {
+            setConfirmed(false);
         }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {id, value} = e.target;
-        setFormData((prev) => ({
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        await runCreateQuitPlan(formData, token);
+    };
+
+    const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData(prev => ({
             ...prev,
-            [id]: value,
+            reason: e.target.value,
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Submit dữ liệu:", formData);
-        setMessage("Đăng ký thành công!");
-        setTimeout(() => onClose?.(), 1000);
+    const handleChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {id, value} = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [id]: Number(value),
+        }));
     };
 
     return (
@@ -59,7 +106,6 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
             {open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg relative">
-                        {/* Nút đóng */}
                         <button
                             onClick={onClose}
                             className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl"
@@ -70,30 +116,32 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Xác nhận đăng ký</h2>
 
                         <div className="flex items-center gap-2 mb-4">
-                            <input
-                                id="confirm"
-                                type="checkbox"
-                                checked={confirmed}
-                                onChange={handleConfirm}
-                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                                disabled={block || loading}
-                            />
+                            <div className="relative flex items-center">
+                                <input
+                                    id="confirm"
+                                    type="checkbox"
+                                    checked={confirmed}
+                                    onChange={handleConfirm}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    disabled={block || loadingCreateNewUserPackage}
+                                />
+                                {loadingCreateNewUserPackage && (
+                                    <div
+                                        className="absolute left-0 top-0 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                                )}
+                            </div>
                             <label htmlFor="confirm" className="text-sm font-medium text-gray-900">
                                 Tôi xác nhận muốn đăng ký
                             </label>
                         </div>
 
                         {message && (
-                            <div
-                                className={`text-sm mb-4 font-medium ${
-                                    confirmed ? "text-green-600" : "text-red-500"
-                                }`}
-                            >
+                            <div className={`text-sm mb-4 font-medium ${block ? "text-red-500" : "text-green-600"}`}>
                                 {message}
                             </div>
                         )}
 
-                        {confirmed && (
+                        {confirmed && !block && (
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="flex flex-col">
                                     <label htmlFor="reason" className="text-sm font-medium text-gray-900 mb-1">
@@ -104,49 +152,51 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
                                         type="text"
                                         placeholder="Nhập lý do"
                                         value={formData.reason}
-                                        onChange={handleChange}
-                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        onChange={handleChangeText}
+                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label htmlFor="frequency" className="text-sm font-medium text-gray-900 mb-1">
-                                        Tần suất hút thuốc của bạn trong ngày?
+                                    <label htmlFor="cigarettesPerDayBeforeQuit"
+                                           className="text-sm font-medium text-gray-900 mb-1">
+                                        Tần suất hút thuốc/ngày?
                                     </label>
                                     <input
-                                        id="frequency"
+                                        id="cigarettesPerDayBeforeQuit"
                                         type="number"
                                         min={0}
-                                        placeholder="Số lần/ngày"
-                                        value={formData.frequency}
-                                        onChange={handleChange}
-                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        value={formData.cigarettesPerDayBeforeQuit}
+                                        onChange={handleChangeNumber}
+                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label htmlFor="years" className="text-sm font-medium text-gray-900 mb-1">
+                                    <label htmlFor="yearsSmokingBeforeQuit"
+                                           className="text-sm font-medium text-gray-900 mb-1">
                                         Bạn đã hút bao nhiêu năm?
                                     </label>
                                     <input
-                                        id="years"
+                                        id="yearsSmokingBeforeQuit"
                                         type="number"
                                         min={0}
-                                        placeholder="Số năm"
-                                        value={formData.years}
-                                        onChange={handleChange}
-                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        value={formData.yearsSmokingBeforeQuit}
+                                        onChange={handleChangeNumber}
+                                        className="px-3 py-2 rounded-md border border-gray-300 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
-                                    disabled={loading}
+                                    disabled={loadingCreateQuitPlan}
                                     className={`w-full text-white text-sm font-medium px-4 py-2 rounded-md ${
-                                        loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+                                        loadingCreateQuitPlan
+                                            ? "bg-blue-400 cursor-not-allowed"
+                                            : "bg-blue-600 hover:bg-blue-700"
                                     }`}
                                 >
-                                    {loading ? "Đang đăng ký..." : "Đăng ký"}
+                                    {loadingCreateQuitPlan ? "Đang đăng ký..." : "Đăng ký"}
                                 </button>
                             </form>
                         )}

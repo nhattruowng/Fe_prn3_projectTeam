@@ -5,3 +5,4 @@ export const useCheckUserExist = () => {
     const user = useSelector((state: RootState) => state.user.user);
     return !!user;
 };
+

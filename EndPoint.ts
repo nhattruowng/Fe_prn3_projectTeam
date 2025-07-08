@@ -13,10 +13,14 @@ export const FEEDBACK_API = "/api/Feedback"
 /// api progresslogs
 export const PROGRESSLOGS_API = "/api/ProgressLogs"
 /// api quit-plan
-export const QUITPLAN_API="/api/QuitPlan"
+export const QUITPLAN_API = "/api/QuitPlan"
 /// api rating
 export const RATING_API = "/api/Rating"
 /// api userbackage
 export const USERPACKAGE_API = "/api/UserPackage"
 // api WeatherForecast
 export const WEATHERORECAST_API = "/api/WeatherForecast"
+// api payment
+export const PAYMENTS_API = "/api/Payment"
+//api UserAchievements
+export const USER_ACHIEVEMENTS_API = "/api/UserAchievements"
