@@ -6,7 +6,14 @@ import type {BaseResponse, PaginatedList} from "../modole/BaseResponseModel.ts";
 
 
 export const CreatNewBlog = async (CreatBlog: CreatBlog, token: string): Promise<BaseResponse<string>> => {
-    const res = await api.post(`${BLOG_API}`, CreatBlog, {
+
+    const formData = new FormData();
+    formData.append("Title", CreatBlog.Title);
+    formData.append("Content", CreatBlog.Content);
+    if (CreatBlog.FeaturedImage) {
+        formData.append("FeaturedImage", CreatBlog.FeaturedImage);
+    }
+    const res = await api.post(`${BLOG_API}`, formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }

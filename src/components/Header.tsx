@@ -23,12 +23,9 @@ const Header: React.FC = () => {
                     </div>
 
                     <nav className="hidden md:flex space-x-6 text-gray-600 font-medium">
-                        <a href="/" className="hover:text-blue-600 hover:underline transition">
+                        <Link to="/" className="hover:text-blue-600 hover:underline transition">
                             Trang Chủ
-                        </a>
-                        <a href="/tips" className="hover:text-blue-600 hover:underline transition">
-                            Mẹo Cai Thuốc
-                        </a>
+                        </Link>
                         <Link to="/cards-pricing" className="hover:text-blue-600 hover:underline transition">
                             Tài Nguyên
                         </Link>

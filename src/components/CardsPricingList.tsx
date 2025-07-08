@@ -1,11 +1,20 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useGetAllMembershipPackage} from "../hooks/MemberShipPackageHooks.ts";
 import type {MembershipPackageRequest} from "../modole/request/MembershipPackageRequest.ts";
 import type {MemberShipPackageResponse} from "../modole/respont/MemberShipPackageRespont.ts";
+import {FormInputs} from "./FormInputs.tsx";
+import {useCheckUserExist} from "../utils/UnitAuthentication.ts";
+import {useNavigate} from "react-router-dom";
 
 
 export const CardsPricingList: React.FC = () => {
     const {data, run} = useGetAllMembershipPackage();
+    const checkUser = useCheckUserExist();
+    const navigate = useNavigate();
+
+    const [open, setOpen] = useState<boolean>(false);
+    const [id, setId] = useState<string>("");
+
 
     const filter = useMemo<MembershipPackageRequest>(() => ({
         PageNumber: 1,
@@ -20,6 +29,14 @@ export const CardsPricingList: React.FC = () => {
     }, [filter]);
     const parseFeatures = (features: string): string[] => {
         return features ? features.split(',').map(feature => feature.trim()) : [];
+    };
+
+    const handleClick = (id: string) => {
+        if (!checkUser) {
+            navigate("/login");
+        }
+        setId(id);
+        setOpen(true);
     };
 
     return (
@@ -69,7 +86,9 @@ export const CardsPricingList: React.FC = () => {
                                 <button
                                     className="mt-6 w-full py-2.5 px-4 text-xs font-bold text-green-500 uppercase border border-green-500 rounded-lg hover:bg-green-50 focus:ring focus:ring-green-200 active:opacity-85 transition-colors"
                                     type="button"
-                                    // onClick={handleClick}
+                                    onClick={() => {
+                                        handleClick(plan.id);
+                                    }}
                                 >
                                     Đăng ký
                                 </button>
@@ -78,6 +97,7 @@ export const CardsPricingList: React.FC = () => {
                     ))}
                 </div>
             </div>
+            {open && (<FormInputs open={open} onClose={() => setOpen(false)} id={id}/>)}
         </>
     )
 }

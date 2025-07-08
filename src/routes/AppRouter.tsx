@@ -15,6 +15,7 @@ import {CalendarLayout} from "../layouts/CalendarLayout.tsx";
 import {CardsPricingList} from "../components/CardsPricingList.tsx";
 import {PaymentSuccess} from "../pages/PaymentSuccess.tsx";
 import {PaymentError} from "../pages/PaymentError.tsx";
+import QuitPlanTabs from "../pages/QuitPlanTabs.tsx";
 
 
 const AppRouter: React.FC = () => {
@@ -37,7 +38,7 @@ const AppRouter: React.FC = () => {
                 <Route path="blog" element={<MainBlog/>}/>
             </Route>
             <Route path="calendar" element={<CalendarLayout/>}>
-                <Route index element={<Calendar/>}/>
+                <Route index element={<QuitPlanTabs/>}/>
             </Route>
 
 

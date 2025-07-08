@@ -10,7 +10,7 @@ export interface BlogFillterRequet {
 export interface CreatBlog {
     Title: string;
     Content: string;
-    FeaturedImage: File,
+    FeaturedImage: File | null,
 }
 
 export interface BlogUpdate {

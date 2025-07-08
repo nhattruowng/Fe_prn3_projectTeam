@@ -17,7 +17,7 @@ const Login = () => {
                 setTimeout(() => navigate("/"), 1500)
             },
             onError: () => {
-                console.log("Login failed");
+                alert("Login failed");
             }
         })
     }

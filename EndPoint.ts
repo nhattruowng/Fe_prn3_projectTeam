@@ -22,3 +22,5 @@ export const USERPACKAGE_API = "/api/UserPackage"
 export const WEATHERORECAST_API = "/api/WeatherForecast"
 // api payment
 export const PAYMENTS_API = "/api/Payment"
+//api UserAchievements
+export const USER_ACHIEVEMENTS_API = "/api/UserAchievements"

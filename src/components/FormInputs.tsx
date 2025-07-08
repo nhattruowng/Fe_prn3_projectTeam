@@ -27,8 +27,7 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
 
     const {
         run: runCreateQuitPlan,
-        loading: loadingCreateQuitPlan,
-        data: dataCreateQuitPlan,
+        loading: loadingCreateQuitPlan
     } = useCreateQuitPlan();
 
     const {
@@ -42,45 +41,51 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
         data: getUserPackageCurrent,
     } = useGetUserPackageCurrent();
 
-    // ✅ Gọi API lấy gói hiện tại
+    // Gọi API lấy gói hiện tại
     useEffect(() => {
-        const fetch = async () => {
-            if (token) await GetUserPackageCurrent(token);
-        };
-        fetch();
+        if (token) {
+            GetUserPackageCurrent(token);
+        }
     }, [token]);
 
-    // ✅ Khi checkbox xác nhận được chọn
-    const handleConfirm = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const isChecked = e.target.checked;
-        setConfirmed(isChecked);
-
-        if (isChecked && !block) {
-            if (getUserPackageCurrent?.data?.isActive) {
-                setMessage("Bạn đã có gói hiện tại đang hoạt động.");
+    // Cập nhật trạng thái block/confirm/message theo gói
+    useEffect(() => {
+        if (getUserPackageCurrent?.statusCode === 200) {
+            if (getUserPackageCurrent.data?.isActive) {
                 setBlock(true);
-                console.log(getUserPackageCurrent)
-                return;
+                setMessage("Bạn đã có gói hiện tại đang hoạt động.");
+            } else {
+                setBlock(false);
+                setMessage("");
             }
-
-            await runCreateNewUserPackage(id, token);
         }
-    };
+    }, [getUserPackageCurrent]);
 
-    // ✅ Mở tab thanh toán nếu có đường dẫn
+
     useEffect(() => {
         if (createNewUserPackage?.message?.startsWith("http")) {
             window.open(createNewUserPackage.message, "_blank");
         }
     }, [createNewUserPackage]);
 
-    // ✅ Submit form kế hoạch
+    const handleConfirm = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+
+        if (isChecked) {
+            if (!block) {
+                await runCreateNewUserPackage(id, token);
+                setConfirmed(true);
+            }
+        } else {
+            setConfirmed(false);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         await runCreateQuitPlan(formData, token);
     };
 
-    // ✅ Xử lý nhập liệu
     const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({
             ...prev,
@@ -121,7 +126,8 @@ export const FormInputs: React.FC<Props> = ({open = false, onClose, id}) => {
                                     disabled={block || loadingCreateNewUserPackage}
                                 />
                                 {loadingCreateNewUserPackage && (
-                                    <div className="absolute left-0 top-0 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                                    <div
+                                        className="absolute left-0 top-0 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
                                 )}
                             </div>
                             <label htmlFor="confirm" className="text-sm font-medium text-gray-900">

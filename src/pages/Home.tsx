@@ -1,25 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {
-    FaTrophy,
-    FaLeaf,
-    FaHeart,
-    FaMedal,
-    FaStar,
-    FaFire,
-    FaAward,
-    FaBolt,
-    FaSun,
-    FaChartLine,
-    FaComments,
-    FaUserMd,
-    FaUsers,
     FaRegHeart,
     FaLungs,
     FaCoins,
-    FaShieldAlt,
-    FaChevronRight
-} from "react-icons/fa";
+    FaShieldAlt} from "react-icons/fa";
 import {MdInsertEmoticon} from "react-icons/md";
 import {Pricing} from "../components/Pricing.tsx";
 import {BlogHomePage} from "../components/BlogHomePage.tsx";
@@ -30,12 +15,6 @@ import type {RootState} from "../store/store.ts";
 const Home: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.user.user)
-
-    const [modalOpen, setModalOpen] = useState<string | null>(null);
-
-    const openModal = (title: string) => setModalOpen(title);
-
-    console.log(modalOpen);
 
     return (
         <div className="min-h-screen bg-gray-100 font-sans">
@@ -84,276 +63,118 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-            {/* Leaderboard Section */}
-            <div className="py-16 bg-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            Bảng Xếp Hạng Thành Tích
-                        </h2>
-                        <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                            Xem những thành viên xuất sắc trong hành trình cai thuốc lá.
-                        </p>
-                    </div>
-                    <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-                        <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-yellow-400">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <div
-                                        className="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center">
-                                        <FaTrophy className="text-yellow-400 text-2xl"/>
-                                    </div>
-                                    <div className="ml-4">
-                                        <h3 className="text-xl font-bold text-gray-900">Nguyễn Văn A</h3>
-                                        <p className="text-sm text-gray-600">365 ngày không hút thuốc</p>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-lg font-bold text-green-600">18.250.000 đ</p>
-                                    <p className="text-sm text-gray-600">Tiết kiệm được</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex justify-between items-center">
-                                <div className="flex space-x-2">
-                  <span
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    <FaLeaf className="mr-1"/> Cao Thủ
-                  </span>
-                                    <span
-                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    <FaHeart className="mr-1"/> Kiên Trì
-                  </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-gray-400">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <div
-                                        className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
-                                        <FaMedal className="text-gray-400 text-2xl"/>
-                                    </div>
-                                    <div className="ml-4">
-                                        <h3 className="text-xl font-bold text-gray-900">Trần Thị B</h3>
-                                        <p className="text-sm text-gray-600">180 ngày không hút thuốc</p>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-lg font-bold text-green-600">9.000.000 đ</p>
-                                    <p className="text-sm text-gray-600">Tiết kiệm được</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex justify-between items-center">
-                                <div className="flex space-x-2">
-                  <span
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                    <FaStar className="mr-1"/> Quyết Tâm
-                  </span>
-                                    <span
-                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">
-                    <FaFire className="mr-1"/> Tiến Bộ
-                  </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-orange-400">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center">
-                                    <div
-                                        className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
-                                        <FaAward className="text-orange-400 text-2xl"/>
-                                    </div>
-                                    <div className="ml-4">
-                                        <h3 className="text-xl font-bold text-gray-900">Lê Văn C</h3>
-                                        <p className="text-sm text-gray-600">90 ngày không hút thuốc</p>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-lg font-bold text-green-600">4.500.000 đ</p>
-                                    <p className="text-sm text-gray-600">Tiết kiệm được</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex justify-between items-center">
-                                <div className="flex space-x-2">
-                  <span
-                      className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                    <FaBolt className="mr-1"/> Nỗ Lực
-                  </span>
-                                    <span
-                                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                    <FaSun className="mr-1"/> Tích Cực
-                  </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
-            </div>
-
-            {/* How It Works Section */}
-            <div id="how-it-works" className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            Cách Hoạt Động
-                        </h2>
-                        <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                            Ba bước đơn giản để cai thuốc lá thành công.
-                        </p>
-                    </div>
-                    <div className="mt-16">
-                        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                            <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div
-                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                                    <span className="text-2xl font-bold">1</span>
-                                </div>
-                                <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
-                                    Lập Kế Hoạch Cá Nhân
-                                </h3>
-                                <p className="mt-4 text-gray-600 text-center">
-                                    Làm bài đánh giá và nhận kế hoạch cai thuốc lá được cá nhân hóa phù hợp với thói
-                                    quen và lối sống của bạn.
-                                </p>
-                            </div>
-                            <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div
-                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                                    <span className="text-2xl font-bold">2</span>
-                                </div>
-                                <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
-                                    Theo Dõi Tiến Trình
-                                </h3>
-                                <p className="mt-4 text-gray-600 text-center">
-                                    Theo dõi hành trình của bạn với các công cụ dễ sử dụng, hiển thị sự cải thiện sức
-                                    khỏe và số tiền tiết kiệm.
-                                </p>
-                            </div>
-                            <div className="bg-gray-50 rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow">
-                                <div
-                                    className="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto">
-                                    <span className="text-2xl font-bold">3</span>
-                                </div>
-                                <h3 className="mt-6 text-xl font-medium text-gray-900 text-center">
-                                    Nhận Hỗ Trợ
-                                </h3>
-                                <p className="mt-4 text-gray-600 text-center">
-                                    Kết nối với cộng đồng và các chuyên gia để được khuyến khích, tư vấn và hỗ trợ trách
-                                    nhiệm.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/*/!* Leaderboard Section *!/*/}
+            {/*<div className="py-16 bg-gray-100">*/}
+            {/*    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">*/}
+            {/*        <div className="text-center">*/}
+            {/*            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">*/}
+            {/*                Bảng Xếp Hạng Thành Tích*/}
+            {/*            </h2>*/}
+            {/*            <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">*/}
+            {/*                Xem những thành viên xuất sắc trong hành trình cai thuốc lá.*/}
+            {/*            </p>*/}
+            {/*        </div>*/}
+            {/*        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">*/}
+            {/*            <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-yellow-400">*/}
+            {/*                <div className="flex items-center justify-between">*/}
+            {/*                    <div className="flex items-center">*/}
+            {/*                        <div*/}
+            {/*                            className="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center">*/}
+            {/*                            <FaTrophy className="text-yellow-400 text-2xl"/>*/}
+            {/*                        </div>*/}
+            {/*                        <div className="ml-4">*/}
+            {/*                            <h3 className="text-xl font-bold text-gray-900">Nguyễn Văn A</h3>*/}
+            {/*                            <p className="text-sm text-gray-600">365 ngày không hút thuốc</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                    <div className="text-right">*/}
+            {/*                        <p className="text-lg font-bold text-green-600">18.250.000 đ</p>*/}
+            {/*                        <p className="text-sm text-gray-600">Tiết kiệm được</p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className="mt-6 flex justify-between items-center">*/}
+            {/*                    <div className="flex space-x-2">*/}
+            {/*      <span*/}
+            {/*          className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">*/}
+            {/*        <FaLeaf className="mr-1"/> Cao Thủ*/}
+            {/*      </span>*/}
+            {/*                        <span*/}
+            {/*                            className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">*/}
+            {/*        <FaHeart className="mr-1"/> Kiên Trì*/}
+            {/*      </span>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-gray-400">*/}
+            {/*                <div className="flex items-center justify-between">*/}
+            {/*                    <div className="flex items-center">*/}
+            {/*                        <div*/}
+            {/*                            className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">*/}
+            {/*                            <FaMedal className="text-gray-400 text-2xl"/>*/}
+            {/*                        </div>*/}
+            {/*                        <div className="ml-4">*/}
+            {/*                            <h3 className="text-xl font-bold text-gray-900">Trần Thị B</h3>*/}
+            {/*                            <p className="text-sm text-gray-600">180 ngày không hút thuốc</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                    <div className="text-right">*/}
+            {/*                        <p className="text-lg font-bold text-green-600">9.000.000 đ</p>*/}
+            {/*                        <p className="text-sm text-gray-600">Tiết kiệm được</p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className="mt-6 flex justify-between items-center">*/}
+            {/*                    <div className="flex space-x-2">*/}
+            {/*      <span*/}
+            {/*          className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">*/}
+            {/*        <FaStar className="mr-1"/> Quyết Tâm*/}
+            {/*      </span>*/}
+            {/*                        <span*/}
+            {/*                            className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800">*/}
+            {/*        <FaFire className="mr-1"/> Tiến Bộ*/}
+            {/*      </span>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            <div className="bg-white rounded-xl shadow-lg p-8 border-t-4 border-orange-400">*/}
+            {/*                <div className="flex items-center justify-between">*/}
+            {/*                    <div className="flex items-center">*/}
+            {/*                        <div*/}
+            {/*                            className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">*/}
+            {/*                            <FaAward className="text-orange-400 text-2xl"/>*/}
+            {/*                        </div>*/}
+            {/*                        <div className="ml-4">*/}
+            {/*                            <h3 className="text-xl font-bold text-gray-900">Lê Văn C</h3>*/}
+            {/*                            <p className="text-sm text-gray-600">90 ngày không hút thuốc</p>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                    <div className="text-right">*/}
+            {/*                        <p className="text-lg font-bold text-green-600">4.500.000 đ</p>*/}
+            {/*                        <p className="text-sm text-gray-600">Tiết kiệm được</p>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className="mt-6 flex justify-between items-center">*/}
+            {/*                    <div className="flex space-x-2">*/}
+            {/*      <span*/}
+            {/*          className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">*/}
+            {/*        <FaBolt className="mr-1"/> Nỗ Lực*/}
+            {/*      </span>*/}
+            {/*                        <span*/}
+            {/*                            className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">*/}
+            {/*        <FaSun className="mr-1"/> Tích Cực*/}
+            {/*      </span>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*       */}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             <Pricing/>
 
             <BlogHomePage/>
 
-            {/* Support Tools Section */}
-            <div id="resources" className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                            Công Cụ Hỗ Trợ
-                        </h2>
-                        <p className="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
-                            Mọi thứ bạn cần để thành công trên hành trình không khói thuốc.
-                        </p>
-                    </div>
-                    <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div
-                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaChartLine className="text-green-600"/>
-                            </div>
-                            <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
-                                Theo Dõi Tiến Trình
-                            </h3>
-                            <p className="mt-2 text-sm text-gray-600 text-center">
-                                Theo dõi sự cải thiện sức khỏe, cơn thèm thuốc và số tiền tiết kiệm theo thời gian thực.
-                            </p>
-                            <div className="mt-4 text-center">
-                                <button
-                                    onClick={() => openModal("Theo Dõi Tiến Trình")}
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
-                                    aria-label="Mở Theo Dõi Tiến Trình"
-                                >
-                                    Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs"/>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div
-                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaComments className="text-green-600"/>
-                            </div>
-                            <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
-                                Hỗ Trợ Trò Chuyện
-                            </h3>
-                            <p className="mt-2 text-sm text-gray-600 text-center">
-                                Hỗ trợ trò chuyện 24/7 để giúp đỡ ngay lập tức khi gặp cơn thèm thuốc hoặc khó khăn.
-                            </p>
-                            <div className="mt-4 text-center">
-                                <button
-                                    onClick={() => openModal("Hỗ Trợ Trò Chuyện")}
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
-                                    aria-label="Mở Hỗ Trợ Trò Chuyện"
-                                >
-                                    Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs"/>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div
-                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaUserMd className="text-green-600"/>
-                            </div>
-                            <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
-                                Tư Vấn Chuyên Nghiệp
-                            </h3>
-                            <p className="mt-2 text-sm text-gray-600 text-center">
-                                Các buổi tư vấn cá nhân với các cố vấn chứng nhận về cai nghiện.
-                            </p>
-                            <div className="mt-4 text-center">
-                                <button
-                                    onClick={() => openModal("Tư Vấn Chuyên Nghiệp")}
-                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
-                                    aria-label="Mở Tư Vấn Chuyên Nghiệp"
-                                >
-                                    Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs"/>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                            <div
-                                className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                                <FaUsers className="text-green-600"/>
-                            </div>
-                            <h3 className="mt-4 text-lg font-medium text-gray-900 text-center">
-                                Diễn Đàn Cộng Đồng
-                            </h3>
-                            <p className="mt-2 text-sm text-gray-600 text-center">
-                                Kết nối với những người cùng hành trình để nhận mẹo, động lực và tình bạn.
-                            </p>
-                            <div className="mt-4 text-center">
-                                <Link to="/blogs"
-                                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-green-600 hover:text-green-700"
-                                      aria-label="Mở Diễn Đàn Cộng Đồng"
-                                >
-                                    Truy Cập
-                                    <FaChevronRight className="ml-1 text-xs"/>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             {/* Why Quit Benefits Section */}
             <div className="py-16 bg-gradient-to-b from-green-50 to-white">
