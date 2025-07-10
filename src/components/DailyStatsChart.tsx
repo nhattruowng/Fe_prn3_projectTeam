@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     BarChart,
     Bar,
@@ -8,54 +8,70 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-
-const generateData = (days: number) => {
-    return Array.from({length: days}, (_, i) => ({
-        day: `${i + 1}`,
-        value: Math.floor(Math.random() * 100) + 20,
-    }));
-};
+import {UserDashboardHooks} from "../hooks/UserDashboardHooks.ts";
+import {useSelector} from "react-redux";
+import type {RootState} from "../store/store.ts";
 
 const months = [
-    {label: "Tháng 1", days: 31},
-    {label: "Tháng 2", days: 28},
-    {label: "Tháng 3", days: 31},
-    {label: "Tháng 4", days: 30},
-    {label: "Tháng 5", days: 31},
-    {label: "Tháng 6", days: 30},
-    {label: "Tháng 7", days: 31},
-    {label: "Tháng 8", days: 31},
-    {label: "Tháng 9", days: 30},
-    {label: "Tháng 10", days: 31},
-    {label: "Tháng 11", days: 30},
-    {label: "Tháng 12", days: 31},
+    {label: "Tháng 1", value: "01"},
+    {label: "Tháng 2", value: "02"},
+    {label: "Tháng 3", value: "03"},
+    {label: "Tháng 4", value: "04"},
+    {label: "Tháng 5", value: "05"},
+    {label: "Tháng 6", value: "06"},
+    {label: "Tháng 7", value: "07"},
+    {label: "Tháng 8", value: "08"},
+    {label: "Tháng 9", value: "09"},
+    {label: "Tháng 10", value: "10"},
+    {label: "Tháng 11", value: "11"},
+    {label: "Tháng 12", value: "12"},
 ];
 
 const DailyStatsChart = () => {
-    const [selectedMonth, setSelectedMonth] = useState(months[6]);
-    const [data, setData] = useState(generateData(selectedMonth.days));
+    const user = useSelector((state: RootState) => state.user.user);
+    const token = user?.accessToken ?? "";
+    const userId = user?.id ?? "";
+
+    const currentDate = new Date();
+    const defaultMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}`;
+
+    const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
+    const {run: fetchData, data} = UserDashboardHooks();
+
+    useEffect(() => {
+        if (userId && selectedMonth) {
+            fetchData(userId, selectedMonth, token);
+        }
+    }, [selectedMonth, userId]);
+
+    const chartData = data?.data?.dailyCountsThisMonth.map(item => ({
+        day: new Date(item.date).getDate(),
+        value: item.cigarettesSmoked,
+    })) ?? [];
 
     const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const month = months[+e.target.value];
-        setSelectedMonth(month);
-        setData(generateData(month.days));
+        const monthValue = e.target.value;
+        const year = currentDate.getFullYear();
+        setSelectedMonth(`${year}-${monthValue}`);
     };
+
+    const selectedMonthLabel = months.find(m => m.value === selectedMonth.split("-")[1])?.label ?? "";
 
     return (
         <div className="bg-white p-6 rounded-2xl shadow-md text-black max-w-5xl mx-auto">
             <div className="flex justify-between items-center mb-4">
                 <div>
-                    <h2 className="text-xl font-semibold">📊 Biểu đồ theo ngày</h2>
-                    <p className="text-sm text-black">Thống kê số lượng mỗi ngày trong {selectedMonth.label}</p>
+                    <h2 className="text-xl font-semibold">📊 Biểu đồ số điếu thuốc đã hút</h2>
+                    <p className="text-sm text-gray-600">Trong {selectedMonthLabel} {currentDate.getFullYear()}</p>
                 </div>
 
                 <select
-                    className="bg-gray-200 text-black border border-gray-600 rounded px-3 py-1 text-sm"
+                    className="bg-gray-100 text-black border border-gray-300 rounded px-3 py-1 text-sm"
                     onChange={handleMonthChange}
-                    defaultValue="6"
+                    value={selectedMonth.split("-")[1]}
                 >
-                    {months.map((month, index) => (
-                        <option key={index} value={index}>
+                    {months.map((month) => (
+                        <option key={month.value} value={month.value}>
                             {month.label}
                         </option>
                     ))}
@@ -63,11 +79,15 @@ const DailyStatsChart = () => {
             </div>
 
             <ResponsiveContainer width="100%" height={320}>
-                <BarChart data={data}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#333"/>
-                    <XAxis dataKey="day" stroke="#ccc"/>
-                    <YAxis stroke="#ccc"/>
-                    <Tooltip contentStyle={{backgroundColor: "#1f1f24", border: "none"}}/>
+                <BarChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#ddd"/>
+                    <XAxis dataKey="day" stroke="#888"/>
+                    <YAxis stroke="#888"/>
+                    <Tooltip
+                        contentStyle={{backgroundColor: "#fff", border: "1px solid #ddd", color: "#000"}}
+                        formatter={(value: number) => [`${value} điếu`, "Số lượng"]}
+                        labelFormatter={(label) => `Ngày ${label}`}
+                    />
                     <Bar dataKey="value" fill="#3b82f6" radius={[6, 6, 0, 0]}/>
                 </BarChart>
             </ResponsiveContainer>

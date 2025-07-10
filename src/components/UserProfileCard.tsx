@@ -62,11 +62,12 @@ export default function UserProfileCard() {
         handle();
     }, [user]);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {observerRef} = useInfiniteScroll({
         loading,
         onLoadMore: () => setPage(prev => prev + 1),
     });
+
+    console.log(observerRef)
 
     useEffect(() => {
         if (activeTab === "Bài Viết") {

@@ -24,3 +24,5 @@ export const WEATHERORECAST_API = "/api/WeatherForecast"
 export const PAYMENTS_API = "/api/Payment"
 //api UserAchievements
 export const USER_ACHIEVEMENTS_API = "/api/UserAchievements"
+//api UserDashBoard
+export const USER_DASHBOARDS_API = "/api/UserDashBoard"

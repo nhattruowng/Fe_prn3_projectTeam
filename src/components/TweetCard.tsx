@@ -1,58 +1,72 @@
-import {Heart, MessageCircle} from "lucide-react";
-import {useState} from "react";
+import { Heart, MessageCircle } from "lucide-react";
+import { useState } from "react";
 import CommentDialog from "./CommentScreen.tsx";
-import type {GetBlogRespont} from "../modole/respont/BlogRespont.ts";
+import type { GetBlogRespont } from "../modole/respont/BlogRespont.ts";
 
-export const TweetCard = ({tweet}: { tweet: GetBlogRespont }) => {
+export const TweetCard = ({ tweet }: { tweet: GetBlogRespont }) => {
     const [showComment, setShowComment] = useState<boolean>(false);
+
+    const formattedDate = new Date(tweet.publishedDate).toLocaleDateString("vi-VN");
 
     return (
         <>
             <div
                 onClick={() => setShowComment(true)}
-                className="border border-gray-700 rounded-xl p-4 mb-4 bg-white text-white transition-colors duration-300 hover:bg-gray-400">
-                <div className="flex gap-4">
-                    <div className="flex-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="font-bold text-black">{tweet.authorName}</h3>
-                        </div>
+                className="border border-gray-200 rounded-2xl shadow-md p-5 mb-6 bg-white hover:shadow-lg transition cursor-pointer"
+            >
+                {/* Tiêu đề và trạng thái */}
+                <div className="flex justify-between items-start mb-3 flex-wrap gap-2">
+                    <h2 className="text-lg font-semibold text-blue-700">{tweet.title}</h2>
+                    <span
+                        className={`text-xs font-medium px-3 py-1 rounded-full ${
+                            tweet.status === "Pending_Approval"
+                                ? "bg-yellow-100 text-yellow-700"
+                                : tweet.status === "Published"
+                                    ? "bg-green-100 text-green-700"
+                                    : "bg-gray-200 text-gray-600"
+                        }`}
+                    >
+            {tweet.status.replace("_", " ")}
+          </span>
+                </div>
 
-                        <p className="mt-2 leading-relaxed text-black">
-                            {tweet.content.split(" ").map((word, i) =>
-                                word.startsWith("#") ? (
-                                    <span key={i} className="text-blue-400 hover:underline mr-1 inline-block">
-                                        {word}
-                                    </span>
-                                ) : (
-                                    <span key={i}>{word} </span>
-                                )
-                            )}
-                        </p>
+                {/* Tác giả và ngày */}
+                <div className="text-sm text-gray-500 mb-2">
+                    ✍️ {tweet.authorName} • {formattedDate}
+                </div>
 
-                        <div className="mt-3 rounded-xl overflow-hidden">
-                            <img
-                                src={tweet.featuredImageUrl}
-                                alt="Tweet visual"
-                                className="w-full h-64 object-cover rounded-2xl transition-transform duration-300 hover:scale-105"
-                            />
-                        </div>
+                {/* Nội dung */}
+                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
+                    {tweet.content}
+                </p>
 
-                        <div className="flex items-center gap-6 mt-4">
-                            <button
-                                onClick={() => setShowComment(true)}
-                                className="flex items-center gap-2 text-black hover:text-blue-400 hover:bg-blue-900 p-2 rounded-full transition duration-200 group"
-                            >
-                                <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform"/>
-                                <span className="text-sm">{tweet.commentsCount}</span>
-                            </button>
+                {/* Ảnh đại diện */}
+                {tweet.featuredImageUrl && (
+                    <div className="rounded-xl overflow-hidden mb-4">
+                        <img
+                            src={tweet.featuredImageUrl}
+                            alt={tweet.title}
+                            className="w-full h-64 object-cover rounded-xl transition-transform duration-300 hover:scale-105"
+                        />
+                    </div>
+                )}
 
-                            <div
-                                className="flex items-center gap-2 text-black p-2 rounded-full transition duration-200 group"
-                            >
-                                <Heart className="w-5 h-5 transition-transform"/>
-                                <div className="text-sm">{tweet.views}</div>
-                            </div>
-                        </div>
+                {/* Thống kê */}
+                <div className="flex items-center gap-6 text-sm text-gray-600">
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setShowComment(true);
+                        }}
+                        className="flex items-center gap-2 hover:text-blue-500"
+                    >
+                        <MessageCircle className="w-5 h-5" />
+                        <span>{tweet.commentsCount}</span>
+                    </button>
+
+                    <div className="flex items-center gap-2">
+                        <Heart className="w-5 h-5" />
+                        <span>{tweet.views} lượt xem</span>
                     </div>
                 </div>
             </div>
