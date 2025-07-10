@@ -7,7 +7,12 @@ export interface QuitPlanRespont {
     yearsSmokingBeforeQuit: number,
     status: string,
     userId: string,
-    smokeFreeDays: number
+    smokeFreeDays: number,
+    healthImpact:{
+        cancerRiskReductionPercent:number,
+        heartRiskReductionPercent:number,
+        summary:string,
+    }
 }
 
 // "id": "0197d24b-678b-720c-a775-385c37f76745",
